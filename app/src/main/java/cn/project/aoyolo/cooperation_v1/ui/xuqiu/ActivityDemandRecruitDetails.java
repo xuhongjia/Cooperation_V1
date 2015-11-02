@@ -9,7 +9,7 @@ import android.widget.TextView;
 import cn.project.aoyolo.cooperation_v1.R;
 
 /**
- * Created by aoyolo.com on 2015/11/2.
+ * Created by pangrihui on 2015/11/2.
  */
 public class ActivityDemandRecruitDetails extends AppCompatActivity {
     private boolean biaozhi=true;  //文本框默认显示3行，未展开标识设置为true,点击按钮展开后改为false
