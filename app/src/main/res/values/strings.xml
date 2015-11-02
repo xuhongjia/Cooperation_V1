@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">予人玫瑰</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="my_info">我的信息</string>
+    <string name="yijian">意见反馈</string>
+    <string name="tuisong">推送设置</string>
+    <string name="sex">性别</string>
+</resources>

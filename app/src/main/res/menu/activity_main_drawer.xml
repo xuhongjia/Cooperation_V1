@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+
+
+        <item android:title="主页">
+            <menu>
+                <item
+                    android:id="@+id/nav_my"
+                    android:icon="@mipmap/my_nor_32px"
+                    android:title="我的" />
+                <item
+                    android:id="@+id/nav_fuwu"
+                    android:icon="@mipmap/fuwu_nor_32px"
+                    android:title="找服务" />
+                <item
+                    android:id="@+id/nav_xuqiu"
+                    android:icon="@mipmap/xuqiu_nor_32px"
+                    android:title="找需求" />
+            </menu>
+        </item>
+        <item android:title="更多">
+            <menu>
+                <item
+                    android:id="@+id/nav_fengxin"
+                    android:icon="@mipmap/gengxin"
+                    android:title="检查更新" />
+                <item
+                    android:id="@+id/nav_yijian"
+                    android:icon="@mipmap/yijian"
+                    android:title="意见反馈" />
+                <item
+                    android:id="@+id/nav_tuisong"
+                    android:icon="@mipmap/tuisong"
+                    android:title="推送设置" />
+                <item
+                    android:id="@+id/nav_fenxiang"
+                    android:icon="@mipmap/fenxiang"
+                    android:title="分享" />
+                <item
+                    android:id="@+id/nav_zhuxiao"
+                    android:icon="@mipmap/zhuxiao"
+                    android:title="注销" />
+            </menu>
+        </item>
+    </group>
+</menu>

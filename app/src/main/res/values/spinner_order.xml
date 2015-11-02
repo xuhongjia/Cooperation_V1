@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="order_arr">
+        <item>成交量优先</item>
+        <item>评价数最多</item>
+        <item>服务最新</item>
+        <item> 价格从低到高</item>
+        <item>价格从高到低</item>
+    </string-array>
+</resources>
