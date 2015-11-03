@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    android:orientation="vertical">
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="拍照"
+        android:textColor="@color/blue_myInfo"
+        android:background="@drawable/myinfo_btn_selector"
+        android:gravity="center"
+        android:id="@+id/btTakePhoto" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:background="@color/background"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="相册中选择"
+        android:textColor="@color/blue_myInfo"
+        android:background="@drawable/myinfo_btn_selector"
+        android:gravity="center"
+        android:id="@+id/btChoosePhoto" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:background="@color/background"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="取消"
+        android:textColor="@color/blue_myInfo"
+        android:background="@drawable/myinfo_btn_selector"
+        android:gravity="center"
+        android:id="@+id/cancel" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:background="@color/background"/>
+
+</LinearLayout>

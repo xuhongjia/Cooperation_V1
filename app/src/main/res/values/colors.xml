@@ -26,4 +26,5 @@
     <color name="transparent">#0000</color>
     <color name="black">#000</color>
     <color name="background_v2">#efefef</color>
+    <color name="blue_myInfo">#6871c2</color>
 </resources>
