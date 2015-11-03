@@ -5,7 +5,7 @@
     android:orientation="vertical">
     <ImageView
         android:layout_width="100dp"
-        android:layout_margin="5dp"
+        android:layout_margin="2dp"
         android:layout_height="100dp"
         android:src="@mipmap/ic_launcher"
         android:id="@+id/myinfo_imageView"/>

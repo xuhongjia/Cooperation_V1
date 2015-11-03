@@ -3,27 +3,20 @@
     android:layout_width="match_parent" android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="10dp"
-    android:background="#FFFAF1"
+    android:background="#fff"
     >
     <TextView
+        android:id="@+id/tv_fuwu_new"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="综合排序"
-        android:padding="5dp"   />
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/colorMenuBarTextSel"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="成交量优先"
+        android:text="服务最新"
         android:padding="5dp"  />
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
         android:background="@color/colorMenuBarTextSel"/>
     <TextView
+        android:id="@+id/tv_fuwu_pingjia"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="评价数最多"
@@ -33,14 +26,16 @@
         android:layout_height="0.5dp"
         android:background="@color/colorMenuBarTextSel"/>
     <TextView
+        android:id="@+id/tv_fuwu_chengjiao"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="服务最新" android:padding="5dp"  />
+        android:text="成交量优先" android:padding="5dp"  />
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
         android:background="@color/colorMenuBarTextSel"/>
     <TextView
+        android:id="@+id/tv_fuwu_jiageup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="价格从低到高" android:padding="5dp"   />
@@ -49,7 +44,12 @@
         android:layout_height="0.5dp"
         android:background="@color/colorMenuBarTextSel"/>
     <TextView
+        android:id="@+id/tv_fuwu_jiagedown"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="价格从高到低" android:padding="5dp"   />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/colorMenuBarTextSel"/>
 </LinearLayout>

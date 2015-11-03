@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="cn.project.aoyolo.cooperation_v1" >
+    package="cn.project.aoyolo.cooperation_v1">
 
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -8,13 +8,15 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_LOGS" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>S
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_CONFIGURATION" />
-
+    <uses-permission android:name="android.permission.CAMERA"/>
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-     
+     <uses-feature android:name="android.hardware.Camera2"/>
+    <uses-feature android:name="android.hardware.Camera2.autofocus"/>
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
     <application
         android:name=".App"
@@ -22,14 +24,14 @@
         android:icon="@mipmap/app_logo"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme.NoActionBar" >
+        android:theme="@style/AppTheme.NoActionBar">
         <meta-data
             android:name="com.amap.api.v2.apikey"
             android:value="cb727163f275ceba6a6548d29d8bb867" />
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -37,47 +39,44 @@
             </intent-filter>
         </activity>
         <!--服务分类界面-->
-        <activity android:name=".ui.main.my.FenleiActivity" >
-        </activity>
+        <activity android:name=".ui.my.FenleiActivity"></activity>
         <!--发布招聘界面-->
-        <activity android:name=".ui.main.my.ZpfenleiActivity" >
-        </activity>
+        <activity android:name=".ui.my.ZpfenleiActivity"></activity>
         <!--发布交易界面-->
-        <activity android:name=".ui.main.my.JyfenleiActivity" >
-        </activity>
+        <activity android:name=".ui.my.JyfenleiActivity"></activity>
         <!--发布培训界面-->
-        <activity android:name=".ui.main.my.PxfenleiActivity" >
-        </activity>
+        <activity android:name=".ui.my.PxfenleiActivity"></activity>
         <!--发布家政界面-->
-        <activity android:name=".ui.main.my.JzfenleiActivity" >
-        </activity>
+        <activity android:name=".ui.my.JzfenleiActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden"></activity>
         <!--发布租房界面-->
-        <activity android:name=".ui.main.my.ZffenleiActivity" >
-        </activity>
+        <activity android:name=".ui.my.ZffenleiActivity"></activity>
         <!--发布团购界面-->
-        <activity android:name=".ui.main.my.TgfenleiActivity" >
-        </activity>
-
-        <activity android:name=".ui.main.my.yijianfankuiActivity" >
-        </activity>
-        <activity android:name=".ui.main.my.TuisongSetttingActivity" >
-        </activity>
+        <activity android:name=".ui.my.TgfenleiActivity"></activity>
+        <!-- 意见反馈 -->
+        <activity android:name=".ui.my.yijianfankuiActivity"></activity>
+        <!-- 推送设置 -->
+        <activity android:name=".ui.my.TuisongSetttingActivity"></activity>
         <!--我的信息-->
+        <activity android:name=".activity.MyInfoActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <!--我的信息选择照片-->
+        <activity android:name=".activity.ChoosePhoto"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <!--找需求模块-->
         <activity
             android:name=".ui.xuqiu.ActivityDemandSalasDetails"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".ui.xuqiu.ActivityDemandTrainDetails"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity android:name=".ui.xuqiu.ActivityDemandHousekeeping"
-            android:screenOrientation="portrait">
-        </activity>
-        <activity android:name=".ui.xuqiu.ActivityDemandGroupbuying"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".ui.xuqiu.ActivityDemandHousekeeping"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".ui.xuqiu.ActivityDemandGroupbuying"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>
