@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#FFFAE1"
+    android:background="#fff"
     android:padding="10dp">
 <LinearLayout
     android:layout_width="match_parent"
@@ -18,7 +18,7 @@
     <EditText
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:background="#FFFAE3"/>
+        android:background="#FAFAFA"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -28,7 +28,7 @@
     <EditText
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:background="#FFFAE3"/>
+        android:background="#FAFAFA"/>
 </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -41,23 +41,23 @@
             android:layout_height="wrap_content"
             android:text="100以内"
             android:paddingRight="10dp"
-            android:background="#FFFAE3"
+            android:background="#FAFAFA"
             android:layout_marginRight="20dp"
             />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="100以内"
+            android:text="100-500"
             android:paddingRight="10dp"
-            android:background="#FFFAE3"
+            android:background="#FAFAFA"
             android:layout_marginRight="20dp"
             />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="100以内"
+            android:text="500以上"
             android:paddingRight="10dp"
-            android:background="#FFFAE3"
+            android:background="#FAFAFA"
             android:layout_marginRight="20dp"
             />
     </LinearLayout>
@@ -89,23 +89,25 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="深圳"
-            android:background="#FFFAE3"
-            android:layout_marginRight="20dp"
-            />
+            android:text="当前定位地址："
+            android:layout_marginRight="10dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="#FFFAE3"
-            android:layout_marginRight="20dp"
+            android:text="深圳"
+            android:layout_marginRight="10dp"
+            android:drawableLeft="@mipmap/weizhi"
+            android:drawablePadding="5dp"
             />
-        <TextView
+        <Button
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="20dp"
             android:text="重新定位"
-            android:background="#FFFAE3"
+            android:background="#FF5000"
             android:layout_marginRight="20dp"
+            android:textColor="#ffffff"
+            android:textSize="12sp"
             />
     </LinearLayout>
     <LinearLayout
@@ -126,15 +128,107 @@
             android:text="所有分类"
             android:gravity="center_vertical"
             android:textColor="#008000"
-            android:drawableRight="@drawable/spinner_drawable"/>
+            />
     </LinearLayout>
-    <Button
-        android:layout_marginTop="10dp"
-        android:layout_gravity="center"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="确定"
-        android:textColor="#ffffff"
-        android:textSize="16sp"
-        android:background="#FF5000"/>
+        android:gravity="center_horizontal"
+        android:padding="10dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="所有分类"
+            android:paddingRight="10dp"
+            android:background="#FAFAFA"
+            android:layout_marginRight="20dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="兼职"
+            android:paddingRight="10dp"
+            android:background="#FAFAFA"
+            android:layout_marginRight="20dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="企业招聘"
+            android:paddingRight="10dp"
+            android:background="#FAFAFA"
+            android:layout_marginRight="20dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="物品交易"
+            android:paddingRight="10dp"
+            android:background="#FAFAFA"
+            android:layout_marginRight="20dp"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:padding="10dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="家政"
+            android:paddingRight="10dp"
+            android:background="#FAFAFA"
+            android:layout_marginRight="20dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="培训"
+            android:paddingRight="10dp"
+            android:background="#FAFAFA"
+            android:layout_marginRight="20dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="租房"
+            android:paddingRight="10dp"
+            android:background="#FAFAFA"
+            android:layout_marginRight="20dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="团购"
+            android:paddingRight="10dp"
+            android:background="#FAFAFA"
+            android:layout_marginRight="20dp"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        >
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:text="确定"
+            android:textColor="#ffffff"
+            android:textSize="14sp"
+            android:background="#FF5000"
+            android:layout_marginRight="50dp"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:text="重置"
+            android:textColor="#ffffff"
+            android:textSize="14sp"
+            android:background="#FF5000"/>
+    </LinearLayout>
 </LinearLayout>
