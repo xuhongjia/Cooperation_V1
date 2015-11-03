@@ -57,9 +57,10 @@
         <!--发布团购界面-->
         <activity android:name=".ui.main.my.TgfenleiActivity" >
         </activity>
-
+        <!-- 意见反馈 -->
         <activity android:name=".ui.main.my.yijianfankuiActivity" >
         </activity>
+        <!-- 推送设置 -->
         <activity android:name=".ui.main.my.TuisongSetttingActivity" >
         </activity>
         <!--我的信息-->
