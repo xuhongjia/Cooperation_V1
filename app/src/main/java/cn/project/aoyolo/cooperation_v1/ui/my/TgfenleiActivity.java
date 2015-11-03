@@ -1,15 +1,15 @@
-package cn.project.aoyolo.cooperation_v1.ui.main.my;
+package cn.project.aoyolo.cooperation_v1.ui.my;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import cn.project.aoyolo.cooperation_v1.R;
 
-public class JyfenleiActivity extends AppCompatActivity {
+public class TgfenleiActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_jyfenlei);
+        setContentView(R.layout.activity_tgfenlei);
     }
 }
