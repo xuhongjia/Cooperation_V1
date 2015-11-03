@@ -1,5 +1,6 @@
 package cn.project.aoyolo.cooperation_v1.ui.main;
 
+import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -20,6 +21,7 @@ import com.amap.api.location.LocationProviderProxy;
 import cn.project.aoyolo.cooperation_v1.ActivityManager;
 import cn.project.aoyolo.cooperation_v1.BaseFragment;
 import cn.project.aoyolo.cooperation_v1.R;
+import cn.project.aoyolo.cooperation_v1.ui.my.ChooseCityActivity;
 
 /**
  * Created by yubin on 2015/10/28.
@@ -31,6 +33,7 @@ public class FuwuFragment extends BaseFragment implements
     private PopupWindow popupwindow2;
     private Button button;
     private Button button2;
+    private Button button3;
     public View onCreateView(LayoutInflater inflater, ViewGroup root, Bundle b) {
         View view = inflater.inflate(R.layout.fuwu_fragment, null);
         init();
@@ -134,6 +137,15 @@ public class FuwuFragment extends BaseFragment implements
                 }
             }
         });
+        button3=(Button)view. findViewById(R.id.spinner_type);
+        button3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, ChooseCityActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     @Override
