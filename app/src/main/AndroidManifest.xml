@@ -39,23 +39,23 @@
             </intent-filter>
         </activity>
         <!--服务分类界面-->
-        <activity android:name=".ui.main.my.FenleiActivity"></activity>
+        <activity android:name=".ui.my.FenleiActivity"></activity>
         <!--发布招聘界面-->
-        <activity android:name=".ui.main.my.ZpfenleiActivity"></activity>
+        <activity android:name=".ui.my.ZpfenleiActivity"></activity>
         <!--发布交易界面-->
-        <activity android:name=".ui.main.my.JyfenleiActivity"></activity>
+        <activity android:name=".ui.my.JyfenleiActivity"></activity>
         <!--发布培训界面-->
-        <activity android:name=".ui.main.my.PxfenleiActivity"></activity>
+        <activity android:name=".ui.my.PxfenleiActivity"></activity>
         <!--发布家政界面-->
-        <activity android:name=".ui.main.my.JzfenleiActivity"></activity>
+        <activity android:name=".ui.my.JzfenleiActivity"></activity>
         <!--发布租房界面-->
-        <activity android:name=".ui.main.my.ZffenleiActivity"></activity>
+        <activity android:name=".ui.my.ZffenleiActivity"></activity>
         <!--发布团购界面-->
-        <activity android:name=".ui.main.my.TgfenleiActivity"></activity>
+        <activity android:name=".ui.my.TgfenleiActivity"></activity>
         <!-- 意见反馈 -->
-        <activity android:name=".ui.main.my.yijianfankuiActivity"></activity>
+        <activity android:name=".ui.my.yijianfankuiActivity"></activity>
         <!-- 推送设置 -->
-        <activity android:name=".ui.main.my.TuisongSetttingActivity"></activity>
+        <activity android:name=".ui.my.TuisongSetttingActivity"></activity>
         <!--我的信息-->
         <activity android:name=".activity.MyInfoActivity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
