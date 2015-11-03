@@ -11,7 +11,7 @@ import com.lidroid.xutils.view.annotation.event.OnClick;
 
 import cn.project.aoyolo.cooperation_v1.BaseFragment;
 import cn.project.aoyolo.cooperation_v1.R;
-import cn.project.aoyolo.cooperation_v1.ui.main.my.FenleiActivity;
+import cn.project.aoyolo.cooperation_v1.ui.my.FenleiActivity;
 
 /**
  * Created by yubin on 2015/10/28.

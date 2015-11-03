@@ -1,4 +1,4 @@
-package cn.project.aoyolo.cooperation_v1.ui.main.my;
+package cn.project.aoyolo.cooperation_v1.ui.my;
 
 import android.content.Intent;
 import android.os.Bundle;
