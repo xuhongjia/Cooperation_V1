@@ -4,7 +4,6 @@ apply plugin: 'bugly'   //添加Bugly符号表插件
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.1"
-    useLibrary 'org.apache.http.legacy'
     defaultConfig {
         applicationId "cn.project.aoyolo.cooperation_v1"
         minSdkVersion 14
@@ -31,6 +30,7 @@ dependencies {
     compile 'com.jiechic.library:xUtils:2.6.14'
     compile files('libs/AMap_Location_v1.4.1_20150917.jar')
     compile files('libs/Android_Cloud_V1.2.1.jar')
+    compile 'org.kymjs.kjframe:kjframe:2.5.2'
 }
 
 bugly {

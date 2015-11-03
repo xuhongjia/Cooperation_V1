@@ -6,6 +6,8 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -19,6 +21,8 @@ import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
 
+import org.kymjs.kjframe.http.HttpCallBack;
+
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -26,7 +30,6 @@ import java.io.FileOutputStream;
 import cn.project.aoyolo.cooperation_v1.API.UpLoadFileApi;
 import cn.project.aoyolo.cooperation_v1.BaseActivity;
 import cn.project.aoyolo.cooperation_v1.R;
-import cn.project.aoyolo.cooperation_v1.entity.GeneralResponse;
 import cn.project.aoyolo.cooperation_v1.entity.HomeMaking;
 
 public class JzfenleiActivity extends BaseActivity {
@@ -37,12 +40,21 @@ public class JzfenleiActivity extends BaseActivity {
     @ViewInject(R.id.name)
     private EditText name;
     private HomeMaking homeMaking;
+    private  Bitmap photo;
+    Handler handler;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_jzfenlei);
         ViewUtils.inject(this);
-
+        handler=new Handler(){
+            @Override
+            public void handleMessage(Message msg){
+                if(msg.what==1){
+                    Toast.makeText(JzfenleiActivity.this,"成功",Toast.LENGTH_LONG).show();
+                }
+            }
+        };
     }
     @OnClick({R.id.img_head,R.id.xzChoose,R.id.stopTime,R.id.send})
     public void onClick(View view){
@@ -64,33 +76,24 @@ public class JzfenleiActivity extends BaseActivity {
     }
     //发送提交请求
     public void send(){
-        img_head.getDrawingCache(true);
-        Bitmap bitmap = img_head.getDrawingCache();
-        img_head.getDrawingCache(false);
         File file = new File(Environment.getExternalStorageDirectory(),IMAGE_FILE_NAME);
         try {
             BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(file));
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bos);
+            photo.compress(Bitmap.CompressFormat.JPEG, 100, bos);
             bos.flush();
             bos.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        UpLoadFileApi.upLoadOneImg(file, new RequestCallBack<GeneralResponse<String>>() {
+        UpLoadFileApi.upLoadOneImg(file, new HttpCallBack() {
             @Override
-            public void onSuccess(ResponseInfo<GeneralResponse<String>> responseInfo) {
-                GeneralResponse<String> result =responseInfo.result;
-                if(result.equals("")||result==null||result.isSuccess())
-                {
-                    Toast.makeText(JzfenleiActivity.this, "上传图片失败....", Toast.LENGTH_SHORT).show();
-                }else
-                {
-                    homeMaking.setImg(result.getData());
-                    homeMaking.setName(name.getText().toString().trim());
-                }
+            public void onSuccess(String t) {
+                super.onSuccess(t);
+                handler.sendEmptyMessage(1);
             }
             @Override
-            public void onFailure(HttpException error, String msg) {
+            public void onFailure( int errorNo,String strMsg) {
+                super.onFailure(errorNo,strMsg);
 
             }
         });
@@ -125,7 +128,7 @@ public class JzfenleiActivity extends BaseActivity {
     private void showResizeImage(Intent data)  {
         Bundle extras = data.getExtras();
         if (extras != null) {
-            Bitmap photo = extras.getParcelable("data");
+            photo = extras.getParcelable("data");
             Drawable drawable = new BitmapDrawable(img_head.getResources(),photo);
             img_head.setImageDrawable(drawable);
         }
