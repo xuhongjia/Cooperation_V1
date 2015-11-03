@@ -1,8 +1,8 @@
 package cn.project.aoyolo.cooperation_v1.ui.xuqiu;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
@@ -15,14 +15,15 @@ import com.lidroid.xutils.view.annotation.event.OnClick;
 import cn.project.aoyolo.cooperation_v1.MainActivity;
 import cn.project.aoyolo.cooperation_v1.R;
 
-public class ActivityDemandGroupbuying extends AppCompatActivity {
+public class ActivityDemandRental extends AppCompatActivity {
+
     private int[] resId = {R.mipmap.demand_ceshi_1, R.mipmap.demand_ceshi_2, R.mipmap.demand_ceshi_3};
     private float startX=0;  //记录手指触目位置
     private int biaozhi=0; //标识滑动方向
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.layout_demand_groupbuying);
+        setContentView(R.layout.layout_demand_rental);
         ViewUtils.inject(this); //使用Xutils
         init();
 

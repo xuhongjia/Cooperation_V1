@@ -15,14 +15,18 @@ import com.lidroid.xutils.view.annotation.event.OnClick;
 import cn.project.aoyolo.cooperation_v1.MainActivity;
 import cn.project.aoyolo.cooperation_v1.R;
 
-public class ActivityDemandGroupbuying extends AppCompatActivity {
+/**
+ * Created by pangrihui on 2015/11/2.
+ */
+public class ActivityDemandSalas extends AppCompatActivity {
     private int[] resId = {R.mipmap.demand_ceshi_1, R.mipmap.demand_ceshi_2, R.mipmap.demand_ceshi_3};
     private float startX=0;  //记录手指触目位置
     private int biaozhi=0; //标识滑动方向
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.layout_demand_groupbuying);
+        setContentView(R.layout.layout_demand_sale);
         ViewUtils.inject(this); //使用Xutils
         init();
 
@@ -78,7 +82,7 @@ public class ActivityDemandGroupbuying extends AppCompatActivity {
                 if (event.getX() - startX > 80) {
                     biaozhi=2;
                 } else if (startX - event.getX() > 80) {
-                    biaozhi=3;
+                  biaozhi=3;
                 }
                 break;
             case MotionEvent.ACTION_UP:

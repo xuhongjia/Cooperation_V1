@@ -4,18 +4,17 @@
     android:orientation="vertical">
     <include layout="@layout/inc_demand_titlebar"/>
     <ViewFlipper
-        android:id="@+id/vfliper_demand_groupbuying_fliper"
+        android:id="@+id/vfliper_demand_sales_fliper"
         android:layout_width="match_parent"
-        android:layout_height="140dp"
-        ></ViewFlipper>
+        android:layout_height="140dp"></ViewFlipper>
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="30dp"
         android:layout_marginTop="10dp"
         >
         <TextView
             style="@style/tv_demand_nomal"
-            android:id="@+id/tv_demand_1"
+            android:id="@+id/tv_demand_recruit_1"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="20dp"
@@ -23,8 +22,8 @@
             />
         <TextView
             style="@style/tv_demand_datashow"
-            android:id="@+id/tv_demand_number"
-            android:layout_toRightOf="@id/tv_demand_1"
+            android:id="@+id/tv_demand_recruit_number"
+            android:layout_toRightOf="@id/tv_demand_recruit_1"
             android:layout_marginLeft="10dp"
             android:layout_centerVertical="true"
             android:text="666"
@@ -40,7 +39,6 @@
             />
     </RelativeLayout>
     <include layout="@layout/inc_dividing_small"></include>
-    <include layout="@layout/inc_dividing_big"></include>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -51,69 +49,156 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
             <LinearLayout
-                style="@style/linearlayout_demand"
-                >
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:orientation="horizontal">
                 <TextView
                     style="@style/tv_demand_nomal"
-                    android:text="商品名称"
+                    android:text="标题"
                     android:layout_marginLeft="20dp"
                     />
                 <TextView
                     style="@style/tv_demand_datashow"
-                    android:id="@+id/tv_demand_train_name"
+                    android:id="@+id/tv_demand_rental_title"
                     android:layout_marginLeft="10dp"
-                    android:text="逗比"
+                    android:text="有房出租"
                     />
             </LinearLayout>
             <include layout="@layout/inc_dividing_small"></include>
             <LinearLayout
-                style="@style/linearlayout_demand"
-                >
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:orientation="horizontal">
                 <TextView
                     style="@style/tv_demand_nomal"
-                    android:text="商品价格"
+                    android:text="区域"
                     android:layout_marginLeft="20dp"
                     />
                 <TextView
                     style="@style/tv_demand_datashow"
-                    android:id="@+id/tv_demand_train_time"
+                    android:id="@+id/tv_demand_rental_place"
                     android:layout_marginLeft="10dp"
-                    android:text="¥5000"
-                    />
-                <TextView
-                    style="@style/tv_demand_nomal"
-                    android:text="团购价格"
-                    android:layout_marginLeft="20dp"
-                    />
-                <TextView
-                    style="@style/tv_demand_datashow"
-                    android:id="@+id/tv_demand_train_money"
-                    android:layout_marginLeft="10dp"
-                    android:text="¥4000"
+                    android:text="深圳西乡"
                     />
             </LinearLayout>
-
             <include layout="@layout/inc_dividing_small"></include>
             <LinearLayout
-                style="@style/linearlayout_demand"
-                >
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:orientation="horizontal">
                 <TextView
                     style="@style/tv_demand_nomal"
-                    android:text="参团人数"
+                    android:text="小区"
                     android:layout_marginLeft="20dp"
                     />
                 <TextView
                     style="@style/tv_demand_datashow"
-                    android:id="@+id/tv_demand_place"
+                    android:id="@+id/tv_demand_rental_village"
                     android:layout_marginLeft="10dp"
-                    android:text="100人已参与"
+                    android:text="好耶雅苑"
                     />
-
+            </LinearLayout>
+            <include layout="@layout/inc_dividing_small"></include>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:orientation="horizontal">
+                <TextView
+                    style="@style/tv_demand_nomal"
+                    android:text="房型"
+                    android:layout_marginLeft="20dp"
+                    />
                 <TextView
                     style="@style/tv_demand_datashow"
-                    android:id="@+id/tv_demand_place1"
+                    android:id="@+id/tv_demand_rental_type"
                     android:layout_marginLeft="10dp"
-                    android:text="（需达到100人）"
+                    android:text="三房两厅"
+                    />
+            </LinearLayout>
+            <include layout="@layout/inc_dividing_small"></include>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:orientation="horizontal">
+                <TextView
+                    style="@style/tv_demand_nomal"
+                    android:text="租金"
+                    android:layout_marginLeft="20dp"
+                    />
+                <TextView
+                    style="@style/tv_demand_datashow"
+                    android:id="@+id/tv_demand_rental_rent"
+                    android:layout_marginLeft="10dp"
+                    android:text="¥3000"
+                    />
+            </LinearLayout>
+            <include layout="@layout/inc_dividing_small"></include>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:orientation="horizontal">
+                <TextView
+                    style="@style/tv_demand_nomal"
+                    android:text="联系电话"
+                    android:layout_marginLeft="20dp"
+                    />
+                <TextView
+                    style="@style/tv_demand_datashow"
+                    android:id="@+id/tv_demand_phone"
+                    android:layout_marginLeft="10dp"
+                    android:text="15766228295"
+                    />
+            </LinearLayout>
+            <include layout="@layout/inc_dividing_small"></include>
+            <include layout="@layout/inc_dividing_big"></include>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:orientation="horizontal">
+                <TextView
+                    style="@style/tv_demand_nomal"
+                    android:text="面积"
+                    android:layout_marginLeft="20dp"
+                    />
+                <TextView
+                    style="@style/tv_demand_datashow"
+                    android:id="@+id/tv_demand_rental_area"
+                    android:layout_marginLeft="10dp"
+                    android:text="200平方"
+                    />
+            </LinearLayout>
+            <include layout="@layout/inc_dividing_small"></include>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:orientation="horizontal">
+                <TextView
+                    style="@style/tv_demand_nomal"
+                    android:text="装修"
+                    android:layout_marginLeft="20dp"
+                    />
+                <TextView
+                    style="@style/tv_demand_datashow"
+                    android:id="@+id/tv_demand_rental_decorate"
+                    android:layout_marginLeft="10dp"
+                    android:text="大修过"
+                    />
+            </LinearLayout>
+            <include layout="@layout/inc_dividing_small"></include>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:orientation="horizontal">
+                <TextView
+                    style="@style/tv_demand_nomal"
+                    android:text="朝向"
+                    android:layout_marginLeft="20dp"
+                    />
+                <TextView
+                    style="@style/tv_demand_datashow"
+                    android:id="@+id/tv_demand_rental_fangxiang"
+                    android:layout_marginLeft="10dp"
+                    android:text="南北朝向"
                     />
             </LinearLayout>
             <include layout="@layout/inc_dividing_small"></include>
@@ -127,69 +212,20 @@
                     android:layout_gravity="top"
                     android:layout_marginTop="10dp"
                     android:layout_marginLeft="20dp"
-                    android:text="商品描述"
+                    android:text="其他说明"
                     />
                 <TextView
-                    android:id="@+id/tv_demand_train_require"
+                    android:id="@+id/tv_demand_commodity_instructions"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginLeft="10dp"
                     android:gravity="top"
                     android:background="@null"
-                    android:text="衣服好看超实惠，团购更优惠"
+                    android:text="衣服要合适好看"
                     android:textSize="15sp"
                     android:textColor="@color/half_black"
-                    android:maxLines="3"/>
-            </LinearLayout>
-            <include layout="@layout/inc_dividing_small"></include>
-            <include layout="@layout/inc_dividing_big"></include>
-            <LinearLayout
-                style="@style/linearlayout_demand"
-                >
-                <TextView
-                    style="@style/tv_demand_nomal"
-                    android:text="公司名称"
-                    android:layout_marginLeft="20dp"
-                    />
-                <TextView
-                    style="@style/tv_demand_datashow"
-                    android:id="@+id/tv_demand_company"
-                    android:layout_marginLeft="10dp"
-                    android:text="艾悠乐"
-                    />
-            </LinearLayout>
-            <include layout="@layout/inc_dividing_small"></include>
-            <LinearLayout
-                style="@style/linearlayout_demand"
-                >
-                <TextView
-                    style="@style/tv_demand_nomal"
-                    android:text="联系人"
-                    android:layout_marginLeft="20dp"
-                    />
-                <TextView
-                    style="@style/tv_demand_datashow"
-                    android:id="@+id/tv_demand_person"
-                    android:layout_marginLeft="10dp"
-                    android:text="庞先生"
-                    />
-            </LinearLayout>
-            <include layout="@layout/inc_dividing_small"></include>
-            <LinearLayout
-                style="@style/linearlayout_demand"
-                >
-                <TextView
-                    style="@style/tv_demand_nomal"
-                    android:text="联系电话"
-                    android:layout_marginLeft="20dp"
-                    />
-                <TextView
-                    style="@style/tv_demand_datashow"
-                    android:id="@+id/tv_demand_phone"
-                    android:layout_marginLeft="10dp"
-                    android:text="15766228295"
-                    />
+                    android:maxLines="4"/>
             </LinearLayout>
             <include layout="@layout/inc_dividing_small"></include>
             <include layout="@layout/inc_dividing_big"></include>
@@ -210,4 +246,3 @@
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
-

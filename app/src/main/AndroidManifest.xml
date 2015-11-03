@@ -66,16 +66,22 @@
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <!--找需求模块-->
         <activity
-            android:name=".ui.xuqiu.ActivityDemandSalasDetails"
+            android:name=".ui.xuqiu.ActivityDemandSalas"
             android:screenOrientation="portrait"></activity>
         <activity
-            android:name=".ui.xuqiu.ActivityDemandTrainDetails"
+            android:name=".ui.xuqiu.ActivityDemandTrain"
             android:screenOrientation="portrait"></activity>
         <activity
             android:name=".ui.xuqiu.ActivityDemandHousekeeping"
             android:screenOrientation="portrait"></activity>
         <activity
             android:name=".ui.xuqiu.ActivityDemandGroupbuying"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".ui.xuqiu.ActivityDemandRental"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".ui.xuqiu.ActivityDemandRecruit"
             android:screenOrientation="portrait"></activity>
     </application>
 

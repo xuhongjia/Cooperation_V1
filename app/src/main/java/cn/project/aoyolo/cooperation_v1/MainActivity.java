@@ -24,7 +24,7 @@ import java.util.List;
 import cn.project.aoyolo.cooperation_v1.activity.MyInfoActivity;
 import cn.project.aoyolo.cooperation_v1.ui.main.FuwuFragment;
 import cn.project.aoyolo.cooperation_v1.ui.main.MyFragment;
-import cn.project.aoyolo.cooperation_v1.ui.main.XuqieFragment;
+import cn.project.aoyolo.cooperation_v1.ui.main.XuqiuFragment;
 import cn.project.aoyolo.cooperation_v1.widget.CommonFragmentPagerAdapter;
 import cn.project.aoyolo.cooperation_v1.widget.RoundCornerImageView;
 
@@ -67,7 +67,7 @@ public class MainActivity extends BaseActivity
         //服务界面
         mPagesFragments.add(new FuwuFragment());
         //需求界面
-        mPagesFragments.add(new XuqieFragment());
+        mPagesFragments.add(new XuqiuFragment());
         CommonFragmentPagerAdapter adapter = new CommonFragmentPagerAdapter(
                 getSupportFragmentManager(), mPagesFragments);
         pager.setAdapter(adapter);

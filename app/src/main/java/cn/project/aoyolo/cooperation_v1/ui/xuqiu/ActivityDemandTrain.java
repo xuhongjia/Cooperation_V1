@@ -6,7 +6,7 @@ import cn.project.aoyolo.cooperation_v1.R;
 /**
  * Created by pangrihui.com on 2015/11/2.
  */
-public class ActivityDemandTrainDetails extends AppCompatActivity {
+public class ActivityDemandTrain extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

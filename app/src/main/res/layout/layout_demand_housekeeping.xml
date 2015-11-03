@@ -132,9 +132,11 @@
             <include layout="@layout/inc_dividing_small"></include>
             <include layout="@layout/inc_dividing_big"></include>
             <TextView
+                android:id="@+id/btn_demand_accept"
                 android:layout_width="80dp"
                 android:layout_height="30dp"
                 android:layout_marginTop="10dp"
+                android:layout_marginBottom="15dp"
                 android:layout_gravity="right"
                 android:layout_marginRight="10dp"
                 android:text="我要接单"
