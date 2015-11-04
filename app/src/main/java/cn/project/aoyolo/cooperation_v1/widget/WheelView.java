@@ -59,7 +59,7 @@ public class WheelView extends View {
     private int itemHeight = 0;
 
     // Center Line
-    private Drawable centerDrawable;
+    private Drawable centerDrawable;//fdf
 
     // Wheel drawables
     private int wheelBackground = R.drawable.wheel_bg;
@@ -654,7 +654,7 @@ public class WheelView extends View {
 		centerDrawable.draw(canvas);
 		//*/
         Paint paint = new Paint();
-        paint.setColor(getResources().getColor(R.color.province_line_border));
+        paint.setColor(getResources().getColor(R.color.background));
 //        paint.setColor(getResources().getColor(R.color.province_line_border));
         // 设置线宽
         paint.setStrokeWidth((float) 3);
@@ -760,7 +760,7 @@ public class WheelView extends View {
 
     /**
      * Scroll the wheel
-     * @param itemsToSkip items to scroll
+     * @param itemsToScroll items to scroll
      * @param time scrolling duration
      */
     public void scroll(int itemsToScroll, int time) {

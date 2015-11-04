@@ -3,7 +3,8 @@
     android:layout_width="match_parent" android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#fff"
-    android:padding="10dp">
+    android:padding="10dp"
+   >
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -18,7 +19,11 @@
     <EditText
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:background="#FAFAFA"/>
+        android:background="#FAFAFA"
+        android:id="@+id/edt_fuwu_minprice"
+        android:gravity="center"
+        android:textColor="#008000"
+        android:inputType="numberDecimal"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -26,9 +31,13 @@
         android:textSize="20sp"
         android:textStyle="bold"/>
     <EditText
+        android:gravity="center"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:background="#FAFAFA"/>
+        android:background="#FAFAFA"
+        android:id="@+id/edt_fuwu_maxprice"
+        android:textColor="#008000"
+        android:inputType="numberDecimal"/>
 </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -37,6 +46,7 @@
         android:padding="10dp"
         >
         <TextView
+            android:id="@+id/tv_fuwu_price100"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="100以内"
@@ -45,6 +55,7 @@
             android:layout_marginRight="20dp"
             />
         <TextView
+            android:id="@+id/tv_fuwu_price500"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="100-500"
@@ -53,6 +64,7 @@
             android:layout_marginRight="20dp"
             />
         <TextView
+            android:id="@+id/tv_fuwu_price500up"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="500以上"
@@ -71,6 +83,7 @@
             android:layout_height="wrap_content"
             android:text="地址："/>
         <TextView
+            android:id="@+id/tv_fuwu_chooseadress"
             android:layout_width="wrap_content"
             android:layout_weight="1"
             android:layout_height="wrap_content"
@@ -78,7 +91,17 @@
             android:text="深圳"
             android:gravity="center_vertical"
             android:textColor="#008000"
-            android:drawableRight="@drawable/spinner_drawable"/>
+            />
+        <Button
+            android:id="@+id/btn_fuwu_choose"
+            android:layout_marginRight="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:text="手动选择"
+            android:background="#FF5000"
+            android:textColor="#ffffff"
+            android:textSize="12sp"
+            />
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -92,15 +115,17 @@
             android:text="当前定位地址："
             android:layout_marginRight="10dp"/>
         <TextView
+            android:id="@+id/tv_fuwu_mapadress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="深圳"
+            android:text="深圳市宝安区"
             android:layout_marginRight="10dp"
             android:drawableLeft="@mipmap/weizhi"
             android:drawablePadding="5dp"
             />
         <Button
+            android:id="@+id/btn_fuwu_dingwei"
             android:layout_width="wrap_content"
             android:layout_height="20dp"
             android:text="重新定位"
@@ -121,11 +146,12 @@
             android:layout_height="wrap_content"
             android:text="分类："/>
         <TextView
+            android:id="@+id/tv_fuwu_leibie"
             android:layout_width="wrap_content"
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:text="所有分类"
+            android:text="兼职"
             android:gravity="center_vertical"
             android:textColor="#008000"
             />
@@ -137,14 +163,7 @@
         android:padding="10dp"
         >
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="所有分类"
-            android:paddingRight="10dp"
-            android:background="#FAFAFA"
-            android:layout_marginRight="20dp"
-            />
-        <TextView
+            android:id="@+id/tv_fuwu_jianzhi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="兼职"
@@ -153,6 +172,7 @@
             android:layout_marginRight="20dp"
             />
         <TextView
+            android:id="@+id/tv_fuwu_zhaopin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="企业招聘"
@@ -161,6 +181,7 @@
             android:layout_marginRight="20dp"
             />
         <TextView
+            android:id="@+id/tv_fuwu_jiaoyi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="物品交易"
@@ -176,6 +197,7 @@
         android:padding="10dp"
         >
         <TextView
+            android:id="@+id/tv_fuwu_jiazheng"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="家政"
@@ -184,6 +206,7 @@
             android:layout_marginRight="20dp"
             />
         <TextView
+            android:id="@+id/tv_fuwu_peixun"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="培训"
@@ -192,6 +215,7 @@
             android:layout_marginRight="20dp"
             />
         <TextView
+            android:id="@+id/tv_fuwu_zufang"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="租房"
@@ -200,6 +224,7 @@
             android:layout_marginRight="20dp"
             />
         <TextView
+            android:id="@+id/tv_fuwu_tuangou"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="团购"
@@ -216,6 +241,7 @@
         android:gravity="center"
         >
         <Button
+            android:id="@+id/btn_fuwu_ok"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:text="确定"
@@ -224,6 +250,7 @@
             android:background="#FF5000"
             android:layout_marginRight="50dp"/>
         <Button
+            android:id="@+id/btn_fuwu_reset"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:text="重置"

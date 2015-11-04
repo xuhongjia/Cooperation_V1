@@ -1,11 +1,10 @@
-package cn.project.aoyolo.cooperation_v1.activity;
+package cn.project.aoyolo.cooperation_v1.ui.my.login;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -130,6 +129,8 @@ public class MyInfoActivity extends BaseActivity
             {
                 bitmap=(Bitmap)data.getExtras().get("data");
                 headerView.setImageBitmap(bitmap);
+                if(chooseDialog.isShowing())
+                    chooseDialog.dismiss();
             }
 
     }

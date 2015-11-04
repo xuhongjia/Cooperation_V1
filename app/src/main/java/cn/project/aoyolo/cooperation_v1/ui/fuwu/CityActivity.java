@@ -1,4 +1,4 @@
-package cn.project.aoyolo.cooperation_v1.ui.my;
+package cn.project.aoyolo.cooperation_v1.ui.fuwu;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;

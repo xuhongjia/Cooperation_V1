@@ -1,5 +1,6 @@
-package cn.project.aoyolo.cooperation_v1.ui.my;
+package cn.project.aoyolo.cooperation_v1.ui.fuwu;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -74,7 +75,8 @@ public class ChooseCityActivity extends CityActivity implements View.OnClickList
         int pCurrent = mViewCity.getCurrentItem();
         mCurrentCityName = mCitisDatasMap.get(mCurrentProviceName)[pCurrent];
         String[] areas = mDistrictDatasMap.get(mCurrentCityName);
-
+        mCurrentDistrictName = mDistrictDatasMap.get(mCurrentCityName)[0];
+        mCurrentZipCode = mZipcodeDatasMap.get(mCurrentDistrictName);
         if (areas == null) {
             areas = new String[] { "" };
         }
@@ -101,16 +103,21 @@ public class ChooseCityActivity extends CityActivity implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_confirm:
-                showSelectedResult();
+                Intent data = new Intent();
+                String address= showSelectedResult();
+                data.putExtra("address", address);
+                setResult(0, data);
+                finish();
                 break;
             default:
                 break;
         }
     }
 
-    private void showSelectedResult() {
-        Toast.makeText(ChooseCityActivity.this, "当前选中:" + mCurrentProviceName + "," + mCurrentCityName + ","
-                + mCurrentDistrictName + "," + mCurrentZipCode, Toast.LENGTH_SHORT).show();
+    private String showSelectedResult() {
+//        Toast.makeText(ChooseCityActivity.this, "当前选中:" + mCurrentProviceName + "," + mCurrentCityName + ","
+//                + mCurrentDistrictName + "," + mCurrentZipCode, Toast.LENGTH_SHORT).show();
+        return mCurrentCityName+mCurrentDistrictName;
     }
 }
 

@@ -1,4 +1,4 @@
-package cn.project.aoyolo.cooperation_v1.activity;
+package cn.project.aoyolo.cooperation_v1.ui.my.login;
 
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
