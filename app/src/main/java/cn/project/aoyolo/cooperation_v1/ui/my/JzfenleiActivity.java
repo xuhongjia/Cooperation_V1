@@ -37,7 +37,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import cn.project.aoyolo.cooperation_v1.API.FuWuApi;
 import cn.project.aoyolo.cooperation_v1.API.UpLoadFileApi;
+import cn.project.aoyolo.cooperation_v1.ActivityManager;
 import cn.project.aoyolo.cooperation_v1.BaseActivity;
 import cn.project.aoyolo.cooperation_v1.R;
 import cn.project.aoyolo.cooperation_v1.entity.GeneralResponse;
@@ -83,6 +85,7 @@ public class JzfenleiActivity extends BaseActivity {
     }
     //初始化数据
     public void init(){
+        homeMaking = new HomeMaking();
         for(String s : xinzi)
         {
             data.add(s);
@@ -103,7 +106,10 @@ public class JzfenleiActivity extends BaseActivity {
                 stopTime();
                 break;
             case R.id.send:
-                send();
+                ActivityManager.removeActivity(ActivityManager.getTopActivity());
+                ActivityManager.getTopActivity().finish();
+                finish();
+                //send();
                 break;
             case R.id.back:
                 finish();
@@ -166,7 +172,7 @@ public class JzfenleiActivity extends BaseActivity {
                     super.onSuccess(t);
                     GeneralResponse<String> response = gson.fromJson(t,new TypeToken<GeneralResponse<String>>(){}.getType());
                     if(response.isSuccess()) {
-                        homeMaking.setImg(response.getData().trim());
+                        homeMaking.setImg(response.getData().toString().trim());
                         homeMaking.setName(name.getText().toString().trim());
                         homeMaking.setFlag(0);
                         homeMaking.setNote(note.getText().toString().trim());
@@ -174,12 +180,23 @@ public class JzfenleiActivity extends BaseActivity {
                         homeMaking.setPhone(phone.getText().toString().trim());
                         homeMaking.setStopTime(stopCalendar.getTimeInMillis());
                         homeMaking.setSalary(xzChoose.getText().toString().trim());
-                        String salary = getJzType(jzType.getCheckedRadioButtonId());
-                        homeMaking.setSalary(salary);
+                        int type = getJzType(jzType.getCheckedRadioButtonId());
+                        homeMaking.setType(type);
                         homeMaking.setVolume(0);
                         homeMaking.setEvaluationNumber(0);
                         homeMaking.setuId(2);
-
+                        FuWuApi.addJzFuWu(gson.toJson(homeMaking), new HttpCallBack() {
+                            @Override
+                            public void onSuccess(String t) {
+                                super.onSuccess(t);
+                                ActivityManager.getTopActivity().finish();
+                                ActivityManager.getTopActivity().finish();
+                            }
+                            @Override
+                            public void onFailure(int errorNo, String strMsg) {
+                                super.onFailure(errorNo, strMsg);
+                            }
+                        });
                     }else
                     {
                         makeTextLong("请求失败，请重试.....");
@@ -193,17 +210,17 @@ public class JzfenleiActivity extends BaseActivity {
         }
     }
     //jzType选择
-    public String getJzType(int radioutton){
+    public int getJzType(int radioutton){
         switch (radioutton)
         {
             case R.id.baomu:
-                return "保姆";
+                return 0;
             case R.id.yuesao:
-                return "月嫂";
+                return 1;
             case R.id.zhongdiangong:
-                return "钟点工";
+                return 2;
             default:
-                return "";
+                return 0;
         }
     }
     //检查数据
