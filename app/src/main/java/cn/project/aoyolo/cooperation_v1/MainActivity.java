@@ -2,6 +2,8 @@ package cn.project.aoyolo.cooperation_v1;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
@@ -18,14 +20,21 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import com.google.gson.Gson;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.project.aoyolo.cooperation_v1.activity.MyInfoActivity;
+
+import cn.project.aoyolo.cooperation_v1.API.Api;
+import cn.project.aoyolo.cooperation_v1.entity.Search;
 import cn.project.aoyolo.cooperation_v1.ui.main.FuwuFragment;
 import cn.project.aoyolo.cooperation_v1.ui.main.MyFragment;
 import cn.project.aoyolo.cooperation_v1.ui.main.XuqiuFragment;
+import cn.project.aoyolo.cooperation_v1.ui.my.login.RegisterActivity;
+import cn.project.aoyolo.cooperation_v1.utils.HttpUtils;
 import cn.project.aoyolo.cooperation_v1.widget.CommonFragmentPagerAdapter;
+import cn.project.aoyolo.cooperation_v1.widget.LoginDialog;
 import cn.project.aoyolo.cooperation_v1.widget.RoundCornerImageView;
 
 public class MainActivity extends BaseActivity
@@ -40,6 +49,8 @@ public class MainActivity extends BaseActivity
     private RadioButton rbGroup[];
     private List<Fragment> mPagesFragments;
     private RoundCornerImageView myInfoImageView;
+    public static Handler handler;
+    private LoginDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,6 +117,18 @@ public class MainActivity extends BaseActivity
             }
         });
         initView();
+        initHandler();
+    }
+
+    private void initHandler() {
+        handler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
+            }
+        };
     }
 
     /**
@@ -121,23 +144,25 @@ public class MainActivity extends BaseActivity
 
     /**
      * 添加侧边栏的头部
-     *
      */
     private void addHeadView() {
         //动态添加头布局，因为静态头布局无法引入里面的控件
         View view = LayoutInflater.from(this).inflate(R.layout.nav_header_main, null);
         view.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT
-        ,ViewGroup.LayoutParams.WRAP_CONTENT));
-        LinearLayout linearLayout = (LinearLayout)view.findViewById(R.id.nav_header);
+                , ViewGroup.LayoutParams.WRAP_CONTENT));
+        LinearLayout linearLayout = (LinearLayout) view.findViewById(R.id.nav_header);
         linearLayout.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 400));
         RoundCornerImageView headerView = (RoundCornerImageView) linearLayout.findViewById(R.id.imageView);
         navigationView.addHeaderView(view);
+        dialog = new LoginDialog(this);
         headerView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(MainActivity.this,MyInfoActivity.class);
-                startActivity(intent);
+//                Intent intent=new Intent(MainActivity.this,MyInfoActivity.class);
+//                startActivity(intent);
+                if (!dialog.isShowing())
+                    dialog.show();
                 drawerLayout.closeDrawers();
             }
         });
@@ -151,6 +176,18 @@ public class MainActivity extends BaseActivity
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
                     public boolean onNavigationItemSelected(MenuItem item) {
+                        Search search = new Search();
+                        search.setWord("1");
+                        search.setType(Search.SearchType.GOODS);
+                        search.setPlace("1");
+                        search.setLowPrice(1);
+                        search.setHightPrice(2);
+                        search.setIndex(20);
+                        search.setFlag(1);
+                        Gson gson = new Gson();
+                        String params = gson.toJson(search);
+                        String url = Api.NURL.concat("/action/goods/queryLastedGoods");
+                        HttpUtils.downLoadDate(params, url);
                         showToast("");
                         drawerLayout.closeDrawers();
                         return true;

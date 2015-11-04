@@ -2,6 +2,7 @@ package cn.project.aoyolo.cooperation_v1.utils;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Rect;
 import android.media.Image;
 import android.os.Handler;
 import android.os.Message;
@@ -9,6 +10,7 @@ import android.util.DisplayMetrics;
 import android.util.LruCache;
 import android.widget.ImageView;
 
+import java.io.BufferedInputStream;
 import java.lang.reflect.Field;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -99,12 +101,12 @@ public class ImageLoader {
     }
 
     /**
-     * 获得压缩图片
+     * 获得压缩图片，仅适用本地相片，不是和网络相片
      *
      * @param path
      * @return
      */
-    private Bitmap getCompressBitmap(String path, ImageView imageView) {
+    public  Bitmap getCompressBitmap(String path, ImageView imageView) {
         //获得需要显示的尺寸
         ImageSize displaySize = getDisplaySize(imageView);
         //获得相片尺寸
@@ -112,8 +114,55 @@ public class ImageLoader {
         //获得压缩图片
         Bitmap bitmap=getCompressImage(path,displaySize,imageSize);
         //添加至缓存
-        imageCache.put(path,bitmap);
+        imageCache.put(path, bitmap);
         return bitmap;
+    }
+
+    /**
+     * 获得压缩图片，此方法可用于网络请求时调用
+     * @param bis
+     * @return
+     */
+    public Bitmap getCompressBitmap(BufferedInputStream bis,ImageView imageView)
+    {
+        Bitmap bitmap=null;
+        ImageSize displaySize=getDisplaySize(imageView);
+        ImageSize imageSize=getImageSize(bis);
+        bitmap=getCompressBitmap(bis,displaySize,imageSize);
+        return bitmap;
+    }
+
+    private Bitmap getCompressBitmap(BufferedInputStream bis, ImageSize displaySize, ImageSize imageSize) {
+        int displayHeight=displaySize.height,displayWidth=displaySize.width;
+        int imageWidth=imageSize.width,imageHeight=imageSize.height;
+        int inSampleSize=0;//缩放比例
+        if(imageWidth>displayWidth||imageHeight>displayHeight)
+        {
+            int ratioWidth=(int)(imageWidth*1.0f)/displayWidth;
+            int ratioHeight=(int)(imageHeight*1.0f)/displayHeight;
+            inSampleSize=Math.max(ratioHeight,ratioWidth);
+        }
+        BitmapFactory.Options options=new BitmapFactory.Options();
+        options.inSampleSize=inSampleSize;
+
+        return BitmapFactory.decodeStream(bis,null,options);
+
+    }
+
+    /**
+     * 根据输入流来获得图片真实的尺寸
+     * @param bis
+     * @return
+     */
+    private ImageSize getImageSize(BufferedInputStream bis) {
+        BitmapFactory.Options options=new BitmapFactory.Options();
+        options.inJustDecodeBounds=true;
+        Rect rect=new Rect(0,0,0,0);
+        BitmapFactory.decodeStream(bis,null,options);
+        ImageSize imageSize=new ImageSize();
+        imageSize.width=options.outWidth;
+        imageSize.height=options.outHeight;
+        return imageSize;
     }
 
     /**

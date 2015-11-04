@@ -27,5 +27,5 @@
     <color name="black">#000</color>
     <color name="background_v2">#efefef</color>
     <color name="blue_myInfo">#6871c2</color>
-    <color name="province_line_border">#C7C7C7</color>
+    <color name="grey_login">#919191</color>
 </resources>

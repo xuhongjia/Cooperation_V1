@@ -57,11 +57,16 @@
         <!-- 推送设置 -->
         <activity android:name=".ui.my.TuisongSetttingActivity"></activity>
         <!--我的信息-->
-        <activity android:name=".activity.MyInfoActivity"
+        <activity android:name=".ui.my.login.MyInfoActivity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <!--我的信息选择照片-->
-        <activity android:name=".activity.ChoosePhoto"
+        <activity android:name=".ui.my.login.ChoosePhoto"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+        <!--注册-->
+        <activity android:name=".ui.my.login.RegisterActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
         <!--找需求模块-->
         <activity
             android:name=".ui.xuqiu.ActivityDemandSalas"
