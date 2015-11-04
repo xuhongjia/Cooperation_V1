@@ -8,7 +8,7 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_LOGS" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>S
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
@@ -47,9 +47,7 @@
         <!--发布培训界面-->
         <activity android:name=".ui.my.PxfenleiActivity"></activity>
         <!--发布家政界面-->
-        <activity android:name=".ui.my.JzfenleiActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan|stateHidden"></activity>
+        <activity android:name=".ui.my.JzfenleiActivity"></activity>
         <!--发布租房界面-->
         <activity android:name=".ui.my.ZffenleiActivity"></activity>
         <!--发布团购界面-->
