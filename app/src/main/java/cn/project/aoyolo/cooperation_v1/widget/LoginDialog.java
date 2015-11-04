@@ -1,5 +1,6 @@
 package cn.project.aoyolo.cooperation_v1.widget;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 import cn.project.aoyolo.cooperation_v1.ActivityManager;
 import cn.project.aoyolo.cooperation_v1.MainActivity;
 import cn.project.aoyolo.cooperation_v1.R;
+import cn.project.aoyolo.cooperation_v1.ui.my.login.LoginActivity;
 import cn.project.aoyolo.cooperation_v1.ui.my.login.RegisterActivity;
 
 /**
@@ -96,7 +98,11 @@ public class LoginDialog extends AlertDialog
         btLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                c.startActivity(new Intent(c, LoginActivity.class));
+                if(LoginDialog.this.isShowing())
+                {
+                    LoginDialog.this.dismiss();
+                }
             }
         });
     }

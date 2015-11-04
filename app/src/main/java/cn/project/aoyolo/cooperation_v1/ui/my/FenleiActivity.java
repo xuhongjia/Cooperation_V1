@@ -21,13 +21,14 @@ public class FenleiActivity extends BaseActivity {
     @OnClick({R.id.back,R.id.fenlei_jiazheng,
             R.id.fenlei_peixun,R.id.fenlei_qyzp,R.id.fenlei_tuangou,R.id.fenlei_wpjy,R.id.fenlei_zufang})
     public void onClick(View view){
+        overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
         switch (view.getId())
         {
             case R.id.back:
                 finish();
                 break;
             case R.id.fenlei_jiazheng:
-                startActivity(new Intent(this,JzfenleiActivity.class));
+                startActivity(new Intent(this, JzfenleiActivity.class));
                 break;
             case R.id.fenlei_peixun:
                 startActivity(new Intent(this,PxfenleiActivity.class));
