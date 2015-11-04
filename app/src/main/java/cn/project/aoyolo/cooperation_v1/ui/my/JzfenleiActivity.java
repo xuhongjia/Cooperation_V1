@@ -22,6 +22,8 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
@@ -38,6 +40,7 @@ import java.util.List;
 import cn.project.aoyolo.cooperation_v1.API.UpLoadFileApi;
 import cn.project.aoyolo.cooperation_v1.BaseActivity;
 import cn.project.aoyolo.cooperation_v1.R;
+import cn.project.aoyolo.cooperation_v1.entity.GeneralResponse;
 import cn.project.aoyolo.cooperation_v1.entity.HomeMaking;
 
 public class JzfenleiActivity extends BaseActivity {
@@ -56,11 +59,13 @@ public class JzfenleiActivity extends BaseActivity {
     @ViewInject(R.id.stopTime)
     private TextView stopTime;
     private HomeMaking homeMaking;
-    private  Bitmap photo;
+    private Bitmap photo;
+    private Gson gson = new Gson();
     Handler handler;
     private AlertDialog myDialog = null;
     private String[] xinzi = new String[]{"1000-2000","2001-3000","3001-4000"};
     private List<String> data = new ArrayList<String>();
+    private Calendar stopCalendar = Calendar.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,6 +88,7 @@ public class JzfenleiActivity extends BaseActivity {
             data.add(s);
         }
     }
+    //按钮点击事件
     @OnClick({R.id.img_head,R.id.xzChoose,R.id.stopTime,R.id.send,R.id.back})
     public void onClick(View view){
         switch (view.getId())
@@ -109,14 +115,13 @@ public class JzfenleiActivity extends BaseActivity {
     //选择结束日期
     public void stopTime(){
         final Calendar calendar = Calendar.getInstance();
-        calendar.set(calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH)+1);
+        calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH) + 1);
         DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                Calendar calendar1 = Calendar.getInstance();
-                calendar1.set(year,monthOfYear,dayOfMonth);
-                if(calendar1.compareTo(calendar)>0) {
-                    stopTime.setText(DateFormat.format("yyyy-MM-dd", calendar1));
+                stopCalendar.set(year,monthOfYear,dayOfMonth);
+                if(stopCalendar.compareTo(calendar)>0) {
+                    stopTime.setText(DateFormat.format("yyyy-MM-dd", stopCalendar));
                 }
                 else
                 {
@@ -144,37 +149,86 @@ public class JzfenleiActivity extends BaseActivity {
     }
     //发送提交请求
     public void send(){
+        if(CheckData())
+        {
+            File file = new File(Environment.getExternalStorageDirectory(),IMAGE_FILE_NAME);
+            try {
+                BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(file));
+                photo.compress(Bitmap.CompressFormat.JPEG, 50, bos);
+                bos.flush();
+                bos.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            UpLoadFileApi.upLoadOneImg(file, new HttpCallBack() {
+                @Override
+                public void onSuccess(String t) {
+                    super.onSuccess(t);
+                    GeneralResponse<String> response = gson.fromJson(t,new TypeToken<GeneralResponse<String>>(){}.getType());
+                    if(response.isSuccess()) {
+                        homeMaking.setImg(response.getData().trim());
+                        homeMaking.setName(name.getText().toString().trim());
+                        homeMaking.setFlag(0);
+                        homeMaking.setNote(note.getText().toString().trim());
+                        homeMaking.setPublishTime(System.currentTimeMillis());
+                        homeMaking.setPhone(phone.getText().toString().trim());
+                        homeMaking.setStopTime(stopCalendar.getTimeInMillis());
+                        homeMaking.setSalary(xzChoose.getText().toString().trim());
+                        String salary = getJzType(jzType.getCheckedRadioButtonId());
+                        homeMaking.setSalary(salary);
+                        homeMaking.setVolume(0);
+                        homeMaking.setEvaluationNumber(0);
+                        homeMaking.setuId(2);
 
-        File file = new File(Environment.getExternalStorageDirectory(),IMAGE_FILE_NAME);
-        try {
-            BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(file));
-            photo.compress(Bitmap.CompressFormat.JPEG, 100, bos);
-            bos.flush();
-            bos.close();
-        } catch (Exception e) {
-            e.printStackTrace();
+                    }else
+                    {
+                        makeTextLong("请求失败，请重试.....");
+                    }
+                }
+                @Override
+                public void onFailure(int errorNo, String strMsg) {
+                    super.onFailure(errorNo, strMsg);
+                }
+            });
         }
-        UpLoadFileApi.upLoadOneImg(file, new HttpCallBack() {
-            @Override
-            public void onSuccess(String t) {
-                super.onSuccess(t);
-                homeMaking.setImg(t.trim());
-                homeMaking.setName(name.getText().toString().trim());
-            }
-            @Override
-            public void onFailure( int errorNo,String strMsg) {
-                super.onFailure(errorNo,strMsg);
-            }
-        });
     }
-
+    //jzType选择
+    public String getJzType(int radioutton){
+        switch (radioutton)
+        {
+            case R.id.baomu:
+                return "保姆";
+            case R.id.yuesao:
+                return "月嫂";
+            case R.id.zhongdiangong:
+                return "钟点工";
+            default:
+                return "";
+        }
+    }
     //检查数据
     public boolean CheckData(){
         if(photo==null)
         {
-
+            BitmapDrawable da = (BitmapDrawable) getResources().getDrawable(R.mipmap.defeat_header);
+            photo=da.getBitmap();
+        }else if(name.getText().toString().trim().equals("")){
+            makeTextLong("请输入标题！");
+            return false;
         }
-        return false;
+        else if(phone.getText().toString().trim().length()<11) {
+            makeTextLong("请输入正确的手机号！");
+            return false;
+        }
+        else if(stopTime.getText().toString().trim().equals("请选择时间")) {
+            makeTextLong("请选择结束时间！");
+            return false;
+        }
+        else if(xzChoose.getText().toString().trim().equals("请选择薪资类别")){
+            makeTextLong("请选择您期望的薪资！");
+            return false;
+        }
+        return true;
     }
 
     //返回事件
