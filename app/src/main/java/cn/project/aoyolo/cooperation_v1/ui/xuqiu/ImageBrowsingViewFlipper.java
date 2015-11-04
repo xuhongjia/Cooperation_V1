@@ -7,6 +7,7 @@ package cn.project.aoyolo.cooperation_v1.ui.xuqiu;
         import android.graphics.drawable.Drawable;
         import android.os.AsyncTask;
         import android.util.AttributeSet;
+        import android.util.Log;
         import android.view.MotionEvent;
         import android.view.View;
         import android.view.ViewTreeObserver;
@@ -35,6 +36,11 @@ public class ImageBrowsingViewFlipper extends ViewFlipper {
     private final static int SLEEP_TIME = 20;
 
     /**
+     * View切换时间间隔
+     */
+    private final static int JIANGE_TIME = 5000;
+
+    /**
      * 图片资源
      */
     private Drawable[] imgsDraw;
@@ -59,6 +65,11 @@ public class ImageBrowsingViewFlipper extends ViewFlipper {
      * 记录手指抬起时的X轴的坐标
      */
     private float xUp;
+
+    /**
+     * 滑动距离超过这个值方可切换画面
+     */
+    private float biaoZhiMove=120;
 
     /**
      * ViewFlipperde的宽度
@@ -88,6 +99,10 @@ public class ImageBrowsingViewFlipper extends ViewFlipper {
      * 当前子View的位置
      */
     private int currViewPosition;
+    /**
+     * 用于判断两次滑动是否是同一个view
+     */
+    private int BiaoZhiViewPosition;
 
     /**
      * 回调接口
@@ -146,6 +161,7 @@ public class ImageBrowsingViewFlipper extends ViewFlipper {
     }
 
     private void init() {
+        ImageBrowsingViewFlipper.this.setFlipInterval(JIANGE_TIME);
         //视图树观察者,用于获取ViewFlipper的宽度
         ViewTreeObserver vto = getViewTreeObserver();
         //当一个视图树将要绘制时，所要调用的回调函数的接口类
@@ -211,11 +227,10 @@ public class ImageBrowsingViewFlipper extends ViewFlipper {
                     break;
                 //手指移动时的逻辑
                 case MotionEvent.ACTION_MOVE:
-
+                    Log.e("doubi",String.valueOf(ImageBrowsingViewFlipper.this.getDisplayedChild()));
                     xMove = event.getRawX();
                     //手指滑动的距离
                     int xDistance = (int)(xMove - xDown);
-
                     //当前显示的ImageView
                     ImageView ivCurr = (ImageView) ImageBrowsingViewFlipper.this.getCurrentView();
                     currViewPosition = ImageBrowsingViewFlipper.this.getDisplayedChild();
@@ -239,20 +254,30 @@ public class ImageBrowsingViewFlipper extends ViewFlipper {
                     int xLast = vfWidth - xDistance;
 
                     ivLast.scrollTo(xLast, 0);
+
                     break;
                 //手指抬起时的逻辑
                 case MotionEvent.ACTION_UP:
                     xUp = event.getRawX();
                     //判断用户手指的意图，这块可以自己改写逻辑
-                    if(wantToNext()) {
+                   /* BiaoZhiViewPosition!=currViewPosition*/
+                    if(xUp!=xDown) {
+                        if (wantToNext()) {
 
-                        new ScrollToNextTask().execute(crollSpeed);
-                    } else if(wantToLast()) {
+                            new ScrollToNextTask().execute(crollSpeed);
+                        } else if (wantToLast()) {
 
-                        new ScrollToLastTask().execute(crollSpeed);
-                    } else {
-                        new ScrollToLastTask().execute(crollSpeed);
+                            new ScrollToLastTask().execute(crollSpeed);
+                        } else {
+                            new ScrollToLastTask().execute(crollSpeed);
+
+
+                        }
                     }
+                    else{
+                        startAndUseAnimation();
+                    }
+                    BiaoZhiViewPosition = currViewPosition;
                     break;
                 default:
                     break;
@@ -266,7 +291,7 @@ public class ImageBrowsingViewFlipper extends ViewFlipper {
      * @return 当前手势想移动到上一个则返回true，否则返回false。
      */
     protected boolean wantToLast() {
-        return xUp - xDown > 0;
+        return xUp - xDown >= biaoZhiMove;
     }
 
     /**
@@ -274,7 +299,7 @@ public class ImageBrowsingViewFlipper extends ViewFlipper {
      * @return 当前手势想移动到下一个则返回true，否则返回false。
      */
     protected boolean wantToNext() {
-        return xUp - xDown < 0;
+        return xUp - xDown < biaoZhiMove;
     }
 
     /**

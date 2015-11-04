@@ -3,54 +3,6 @@
     android:layout_width="match_parent" android:layout_height="match_parent"
     android:orientation="vertical">
     <include layout="@layout/inc_demand_titlebar"/>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <cn.project.aoyolo.cooperation_v1.ui.xuqiu.ImageBrowsingViewFlipper
-            android:id="@+id/viewflipper"
-            android:layout_width="match_parent"
-            android:layout_height="140dp"/>
-
-        <cn.project.aoyolo.cooperation_v1.ui.xuqiu.MarkView
-            android:id="@+id/markView"
-            android:layout_alignBottom="@+id/viewflipper"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            />
-    </RelativeLayout>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:layout_marginTop="10dp"
-        >
-        <TextView
-            style="@style/tv_demand_nomal"
-            android:id="@+id/tv_demand_recruit_1"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="20dp"
-            android:text="需求编号"
-            />
-        <TextView
-            style="@style/tv_demand_datashow"
-            android:id="@+id/tv_demand_recruit_number"
-            android:layout_toRightOf="@id/tv_demand_recruit_1"
-            android:layout_marginLeft="10dp"
-            android:layout_centerVertical="true"
-            android:text="666"
-            />
-        <TextView
-            style="@style/tv_demand_nomal"
-            android:id="@+id/tv_demand_publisher"
-            android:text="发布人"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="10dp"
-            android:textColor="@color/colorToolBar"
-            />
-    </RelativeLayout>
-    <include layout="@layout/inc_dividing_small"></include>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -60,6 +12,55 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <cn.project.aoyolo.cooperation_v1.ui.xuqiu.ImageBrowsingViewFlipper
+                    android:id="@+id/viewflipper"
+                    android:layout_width="match_parent"
+                    android:layout_height="140dp"/>
+
+                <cn.project.aoyolo.cooperation_v1.ui.xuqiu.MarkView
+                    android:id="@+id/markView"
+                    android:layout_alignBottom="@+id/viewflipper"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginTop="10dp"
+                >
+                <TextView
+                    style="@style/tv_demand_nomal"
+                    android:id="@+id/tv_demand_recruit_1"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    android:text="需求编号"
+                    />
+                <TextView
+                    style="@style/tv_demand_datashow"
+                    android:id="@+id/tv_demand_recruit_number"
+                    android:layout_toRightOf="@id/tv_demand_recruit_1"
+                    android:layout_marginLeft="10dp"
+                    android:layout_centerVertical="true"
+                    android:text="666"
+                    />
+                <TextView
+                    style="@style/tv_demand_nomal"
+                    android:id="@+id/tv_demand_publisher"
+                    android:text="发布人"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:textColor="@color/colorToolBar"
+                    />
+            </RelativeLayout>
+            <include layout="@layout/inc_dividing_small"></include>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="30dp"

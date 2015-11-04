@@ -4,10 +4,55 @@
     android:orientation="vertical"
     >
     <Button
-        android:id="@+id/btn_xuqiufragement_btn"
+        android:id="@+id/btn_xuqiufragement_btn1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="测试跳转其他界面"
+        android:text="测试招聘界面"
+        android:textSize="18sp"
+        android:layout_gravity="center"
+        />
+    <Button
+        android:id="@+id/btn_xuqiufragement_btn2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="测试售卖界面"
+        android:textSize="18sp"
+        android:layout_gravity="center"
+        />
+    <Button
+    android:id="@+id/btn_xuqiufragement_btn3"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:text="测试培训界面"
+    android:textSize="18sp"
+    android:layout_gravity="center"
+    />
+    <Button
+        android:id="@+id/btn_xuqiufragement_btn4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="测试家政界面"
+        android:textSize="18sp"
+        android:layout_gravity="center"
+        />
+    <Button
+        android:id="@+id/btn_xuqiufragement_btn5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="测试租房界面"
+        android:textSize="18sp"
+        android:layout_gravity="center"
+        />
+    <Button
+        android:id="@+id/btn_xuqiufragement_btn6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="测试团购界面"
         android:textSize="18sp"
         android:layout_gravity="center"
         />
