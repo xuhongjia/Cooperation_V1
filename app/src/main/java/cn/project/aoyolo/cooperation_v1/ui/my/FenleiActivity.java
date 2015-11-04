@@ -11,7 +11,6 @@ import cn.project.aoyolo.cooperation_v1.BaseActivity;
 import cn.project.aoyolo.cooperation_v1.R;
 
 public class FenleiActivity extends BaseActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

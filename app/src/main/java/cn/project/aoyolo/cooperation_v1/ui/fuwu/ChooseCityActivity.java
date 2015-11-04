@@ -1,4 +1,4 @@
-package cn.project.aoyolo.cooperation_v1.ui.my;
+package cn.project.aoyolo.cooperation_v1.ui.fuwu;
 
 import android.os.Bundle;
 import android.view.View;

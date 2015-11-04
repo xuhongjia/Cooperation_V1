@@ -8,6 +8,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
@@ -18,10 +19,9 @@ import com.amap.api.location.AMapLocationListener;
 import com.amap.api.location.LocationManagerProxy;
 import com.amap.api.location.LocationProviderProxy;
 
-import cn.project.aoyolo.cooperation_v1.ActivityManager;
 import cn.project.aoyolo.cooperation_v1.BaseFragment;
 import cn.project.aoyolo.cooperation_v1.R;
-import cn.project.aoyolo.cooperation_v1.ui.my.ChooseCityActivity;
+import cn.project.aoyolo.cooperation_v1.ui.fuwu.ChooseCityActivity;
 
 /**
  * Created by yubin on 2015/10/28.
@@ -34,6 +34,18 @@ public class FuwuFragment extends BaseFragment implements
     private Button button;
     private Button button2;
     private Button button3;
+    private static String address;
+    private TextView tvGroup[];
+    private TextView tv_fuwu_new;
+    private TextView tv_fuwu_pingjia;
+    private TextView tv_fuwu_chengjiao;
+    private TextView tv_fuwu_jiageup;
+    private TextView tv_fuwu_jiagedown;
+    private EditText edt_fuwu_minprice;
+    private EditText edt_fuwu_maxprice;
+    private Button btn_fuwu_dingwei;
+    private Button btn_fuwu_ok;
+    private Button btn_fuwu_reset;
     public View onCreateView(LayoutInflater inflater, ViewGroup root, Bundle b) {
         View view = inflater.inflate(R.layout.fuwu_fragment, null);
         init();
@@ -54,16 +66,15 @@ public class FuwuFragment extends BaseFragment implements
             public boolean onTouch(View v, MotionEvent event) {
                 if (popupwindow != null && popupwindow.isShowing()) {
                     popupwindow.dismiss();
-                    popupwindow = null;
                 }
                 return false;
             }
         });
-        TextView tv_fuwu_new=(TextView) customView.findViewById(R.id.tv_fuwu_new);
-        TextView tv_fuwu_pingjia=(TextView) customView.findViewById(R.id.tv_fuwu_pingjia);
-        TextView tv_fuwu_chengjiao=(TextView) customView.findViewById(R.id.tv_fuwu_chengjiao);
-        TextView tv_fuwu_jiageup=(TextView) customView.findViewById(R.id.tv_fuwu_jiageup);
-        TextView tv_fuwu_jiagedown=(TextView) customView.findViewById(R.id.tv_fuwu_jiagedown);
+        tv_fuwu_new=(TextView) customView.findViewById(R.id.tv_fuwu_new);
+        tv_fuwu_pingjia=(TextView) customView.findViewById(R.id.tv_fuwu_pingjia);
+        tv_fuwu_chengjiao=(TextView) customView.findViewById(R.id.tv_fuwu_chengjiao);
+        tv_fuwu_jiageup=(TextView) customView.findViewById(R.id.tv_fuwu_jiageup);
+        tv_fuwu_jiagedown=(TextView) customView.findViewById(R.id.tv_fuwu_jiagedown);
         tv_fuwu_new.setOnClickListener(this);
         tv_fuwu_pingjia.setOnClickListener(this);
         tv_fuwu_chengjiao.setOnClickListener(this);
@@ -72,23 +83,39 @@ public class FuwuFragment extends BaseFragment implements
     }
     public void initmPopupWindowView2() {
         // // 获取自定义布局文件pop.xml的视图
-        View customView = getActivity().getLayoutInflater().inflate(R.layout.popupwindow_2,
+        View customView2 = getActivity().getLayoutInflater().inflate(R.layout.popupwindow_2,
                 null, false);
 // 创建PopupWindow实例
-        popupwindow2 = new PopupWindow(customView, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT,true);
+        popupwindow2 = new PopupWindow(customView2, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT,true);
 // 设置动画效果 [R.style.AnimationFade 是自己事先定义好的]
 //        popupwindow2.setAnimationStyle(R.style.AnimationFade);
 // 自定义view添加触摸事件
-        customView.setOnTouchListener(new View.OnTouchListener() {
+        customView2.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (popupwindow2 != null && popupwindow2.isShowing()) {
                     popupwindow2.dismiss();
-                    popupwindow2 = null;
                 }
                 return false;
             }
         });
+        int tvID[] = new int[]{R.id.tv_fuwu_price100,R.id.tv_fuwu_price500,R.id.tv_fuwu_price500up,R.id.tv_fuwu_chooseadress,R.id.tv_fuwu_mapadress,R.id.tv_fuwu_leibie,R.id.tv_fuwu_jianzhi,R.id.tv_fuwu_zhaopin,R.id.tv_fuwu_jiaoyi
+                ,R.id.tv_fuwu_jiazheng,R.id.tv_fuwu_peixun,R.id.tv_fuwu_zufang,R.id.tv_fuwu_tuangou};
+        tvGroup = new TextView[tvID.length];
+        for (int i = 0; i < tvID.length; ++i) {
+            tvGroup[i] = (TextView) customView2.findViewById(tvID[i]);
+            tvGroup[i].setOnClickListener(this);
+        }
+         edt_fuwu_minprice=(EditText) customView2.findViewById(R.id.edt_fuwu_minprice);
+         edt_fuwu_maxprice=(EditText) customView2.findViewById(R.id.edt_fuwu_maxprice);
+         btn_fuwu_dingwei=(Button) customView2.findViewById(R.id.btn_fuwu_dingwei);
+         btn_fuwu_ok=(Button) customView2.findViewById(R.id.btn_fuwu_ok);
+         btn_fuwu_reset=(Button) customView2.findViewById(R.id.btn_fuwu_reset);
+         edt_fuwu_minprice.setOnClickListener(this);
+         edt_fuwu_maxprice.setOnClickListener(this);
+         btn_fuwu_dingwei.setOnClickListener(this);
+         btn_fuwu_ok.setOnClickListener(this);
+         btn_fuwu_reset.setOnClickListener(this);
     }
     public void init(){
 // 初始化定位，只采用网络定位
@@ -109,7 +136,6 @@ public class FuwuFragment extends BaseFragment implements
             public void onClick(View v) {
                 if (popupwindow2 != null && popupwindow2.isShowing()) {
                     popupwindow2.dismiss();
-                    popupwindow2 = null;
                 }
                 if (popupwindow != null&&popupwindow.isShowing()) {
                     popupwindow.dismiss();
@@ -126,7 +152,6 @@ public class FuwuFragment extends BaseFragment implements
             public void onClick(View v) {
                 if (popupwindow != null && popupwindow.isShowing()) {
                     popupwindow.dismiss();
-                    popupwindow = null;
                 }
                 if (popupwindow2 != null && popupwindow2.isShowing()) {
                     popupwindow2.dismiss();
@@ -141,8 +166,9 @@ public class FuwuFragment extends BaseFragment implements
         button3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, ChooseCityActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(mContext, ChooseCityActivity.class);
+//                startActivity(intent);
+                Toast.makeText(getContext(),address,Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -154,6 +180,7 @@ public class FuwuFragment extends BaseFragment implements
             //获取位置信息
             Double geoLat = amapLocation.getLatitude();
             Double geoLng = amapLocation.getLongitude();
+            address=amapLocation.getCity()+amapLocation.getDistrict();
         }
     }
 
@@ -196,28 +223,25 @@ public class FuwuFragment extends BaseFragment implements
             case R.id.tv_fuwu_new:
                 button.setText("服务最新");
                 popupwindow.dismiss();
-                popupwindow = null;
                 break;
             case R.id.tv_fuwu_pingjia:
                 button.setText("评价数最多");
                 popupwindow.dismiss();
-                popupwindow = null;
-                popupwindow = null;
                 break;
             case R.id.tv_fuwu_chengjiao:
                 button.setText("成交量优先");
                 popupwindow.dismiss();
-                popupwindow = null;
                 break;
             case R.id.tv_fuwu_jiageup:
                 button.setText("价格从低到高");
                 popupwindow.dismiss();
-                popupwindow = null;
                 break;
             case R.id.tv_fuwu_jiagedown:
                 button.setText("价格从高到低");
                 popupwindow.dismiss();
-                popupwindow = null;
+                break;
+            case R.id.tv_fuwu_price100:
+                edt_fuwu_maxprice.setText("100");
                 break;
             default:
                 break;

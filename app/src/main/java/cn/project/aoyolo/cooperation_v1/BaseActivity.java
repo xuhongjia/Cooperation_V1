@@ -19,6 +19,8 @@ import android.widget.Toast;
 
 import java.io.File;
 
+import cn.project.aoyolo.cooperation_v1.entity.TotalSearch;
+
 /**
  * 统一进行活动管理
  * Created by Hy on 2015/11/2.
@@ -63,6 +65,7 @@ public class BaseActivity extends AppCompatActivity
     public static final int RESIZE_REQUEST_CODE = 2;
     public static final String IMAGE_FILE_NAME = "header.jpg";
     public String[] items = new String[] { "选择本地图片", "拍照" };
+    //设置头像
     public void setImg(){
         new AlertDialog.Builder(this)
                 .setTitle("设置头像")
@@ -108,6 +111,7 @@ public class BaseActivity extends AppCompatActivity
                 }).show();
 
     }
+    //检查SD卡是否可用
     public static boolean hasSdcard(){
         String state = Environment.getExternalStorageState();
         if(state.equals(Environment.MEDIA_MOUNTED)){
@@ -116,6 +120,7 @@ public class BaseActivity extends AppCompatActivity
             return false;
         }
     }
+    //检查SD是否存在
     public boolean isSdcardExisting() {
         final String state = Environment.getExternalStorageState();
         if (state.equals(Environment.MEDIA_MOUNTED)) {
@@ -124,7 +129,7 @@ public class BaseActivity extends AppCompatActivity
             return false;
         }
     }
-
+    //剪切图片
     public void resizeImage(Uri uri) {
         Intent intent = new Intent("com.android.camera.action.CROP");
         intent.setDataAndType(uri, "image/*");
@@ -136,10 +141,17 @@ public class BaseActivity extends AppCompatActivity
         intent.putExtra("return-data", true);
         startActivityForResult(intent, RESIZE_REQUEST_CODE);
     }
-
-
+    //获取退片Uri
     public Uri getImageUri() {
         return Uri.fromFile(new File(Environment.getExternalStorageDirectory(),
                 IMAGE_FILE_NAME));
+    }
+
+    //自定义Toast.makeText
+    public void makeTextShort(String content){
+        Toast.makeText(this,content,Toast.LENGTH_SHORT).show();
+    }
+    public void makeTextLong(String content){
+        Toast.makeText(this,content,Toast.LENGTH_LONG).show();
     }
 }
