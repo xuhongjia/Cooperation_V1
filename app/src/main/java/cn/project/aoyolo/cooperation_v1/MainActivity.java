@@ -31,14 +31,14 @@ import cn.project.aoyolo.cooperation_v1.entity.Search;
 import cn.project.aoyolo.cooperation_v1.ui.main.FuwuFragment;
 import cn.project.aoyolo.cooperation_v1.ui.main.MyFragment;
 import cn.project.aoyolo.cooperation_v1.ui.main.XuqiuFragment;
+import cn.project.aoyolo.cooperation_v1.ui.my.login.MyInfoActivity;
 import cn.project.aoyolo.cooperation_v1.ui.my.login.RegisterActivity;
 import cn.project.aoyolo.cooperation_v1.utils.HttpUtils;
 import cn.project.aoyolo.cooperation_v1.widget.CommonFragmentPagerAdapter;
 import cn.project.aoyolo.cooperation_v1.widget.LoginDialog;
 import cn.project.aoyolo.cooperation_v1.widget.RoundCornerImageView;
 
-public class MainActivity extends BaseActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends BaseActivity {
     // 用RadioGroup来实现底部导航菜单。
     private RadioGroup group;
     private NavigationView navigationView;
@@ -63,8 +63,6 @@ public class MainActivity extends BaseActivity
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
         pager = (ViewPager) findViewById(R.id.viewpager_main);
         group = (RadioGroup) findViewById(R.id.radiogroup_main);
         rbGroup = new RadioButton[rbtID.length];
@@ -159,10 +157,15 @@ public class MainActivity extends BaseActivity
         headerView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent=new Intent(MainActivity.this,MyInfoActivity.class);
-//                startActivity(intent);
-                if (!dialog.isShowing())
-                    dialog.show();
+                if(UserManager.getInstance().getUser()==null)
+                {
+                    if (!dialog.isShowing())
+                        dialog.show();
+                }else
+                {
+                    Intent intent=new Intent(MainActivity.this,MyInfoActivity.class);
+                    startActivity(intent);
+                }
                 drawerLayout.closeDrawers();
             }
         });
@@ -229,16 +232,4 @@ public class MainActivity extends BaseActivity
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-        if (id == R.id.imageView) {
-
-        }
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
-    }
 }

@@ -93,6 +93,12 @@ public class LoginDialog extends AlertDialog
      */
     private void intLogin() {
         btLogin=(Button)view.findViewById(R.id.btLogin);
+        btLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 
     /**
