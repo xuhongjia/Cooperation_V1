@@ -22,7 +22,8 @@
         android:background="#FAFAFA"
         android:id="@+id/edt_fuwu_minprice"
         android:gravity="center"
-        android:textColor="#008000"/>
+        android:textColor="#008000"
+        android:inputType="numberDecimal"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -35,7 +36,8 @@
         android:layout_height="wrap_content"
         android:background="#FAFAFA"
         android:id="@+id/edt_fuwu_maxprice"
-        android:textColor="#008000"/>
+        android:textColor="#008000"
+        android:inputType="numberDecimal"/>
 </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
