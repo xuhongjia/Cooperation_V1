@@ -7,15 +7,18 @@
     <TextView
         android:id="@+id/title"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:padding="5dp"
-        android:text="@string/xinziliebiao"/>
+        android:layout_height="?attr/actionBarSize"
+        android:gravity="center_vertical"
+        android:textSize="20sp"
+        android:textColor="@color/white_my_fragment"
+        android:padding="10dp"
+        android:text="@string/xinziliebiao"
+        android:background="@color/colorToolBar"/>
     <View
         android:id="@+id/alert_diver"
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
-        android:background="@color/background_v2"/>
+        android:background="@color/background"/>
     <ListView
         android:id="@+id/alert_list_view"
         android:layout_width="match_parent"
