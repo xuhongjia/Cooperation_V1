@@ -1,10 +1,13 @@
 package cn.project.aoyolo.cooperation_v1.ui.xuqiu;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.ViewFlipper;
 
@@ -15,10 +18,10 @@ import com.lidroid.xutils.view.annotation.event.OnClick;
 import cn.project.aoyolo.cooperation_v1.MainActivity;
 import cn.project.aoyolo.cooperation_v1.R;
 
-public class ActivityDemandGroupbuying extends AppCompatActivity {
-    private int[] resId = {R.mipmap.demand_ceshi_1, R.mipmap.demand_ceshi_2, R.mipmap.demand_ceshi_3};
-    private float startX=0;  //记录手指触目位置
-    private int biaozhi=0; //标识滑动方向
+public class ActivityDemandGroupbuying extends AppCompatActivity implements ImageBrowsingViewFlipper.IImageBrowsingMark{
+    private Drawable[] imgs ;
+    private MarkView markView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,75 +30,68 @@ public class ActivityDemandGroupbuying extends AppCompatActivity {
         init();
 
     }
-    @ViewInject(value=R.id.vfliper_demand_sales_fliper)
-    ViewFlipper flipper;
 
-    @OnClick(value={R.id.back})
-    public void onClick(View view){
-        switch (view.getId()){
-            case R.id.back:{
+    @ViewInject(value = R.id.collect)
+    ImageView imageView;
+
+    @OnClick(value = {R.id.back, R.id.collect, R.id.btn_demand_accept})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.back: {
                 //返回主界面
-                Intent intent=new Intent(this, MainActivity.class);
+                Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
                 finish();
                 break;
             }
+            case R.id.collect: {
+                //收藏
+                imageView.setImageResource(R.mipmap.collect_allready);
+                break;
+            }
+            case R.id.btn_demand_accept: {
+                // 用户点击接单按钮处理
+
+                break;
+            }
         }
     }
 
-    public void init(){
-        //设置ViewFlipper
-        SetViewFlipper();
+    public void init() {
+        ImageBrowsingViewFlipper ibvf = (ImageBrowsingViewFlipper) findViewById(R.id.viewflipper);
+        imgs = new Drawable[5];
+        imgs[0] =  getResources().getDrawable(R.drawable.img1);
+        imgs[1] =  getResources().getDrawable(R.drawable.img2);
+        imgs[2] =  getResources().getDrawable(R.drawable.img3);
+        imgs[3] =  getResources().getDrawable(R.drawable.img4);
+        imgs[4] =  getResources().getDrawable(R.drawable.img5);
+        //设置图片浏览指示标接口
+        ibvf.setmImgBrowsingMark(this);
+        //设置图片
+        ibvf.setImgsDraw(imgs);
+        markView = (MarkView) findViewById(R.id.markView);
+        markView.setMarkCount(imgs.length);
+        //起始位置设置为0
+        markView.setMark(0);
 
-    }
-    //设置ViewFlipper
-    private void SetViewFlipper() {
-        //动态导入的方式为ViewFlipper加入子View
-        for (int i = 0; i < resId.length; i++) {
-            ImageView image = new ImageView(this);
-            image.setBackgroundResource(resId[i]);
-            flipper.addView(image);
-        }
+        // 向左滑动左侧进入的渐变效果（alpha 0.1  -> 1.0）
+        Animation lInAnim = AnimationUtils.loadAnimation(this, R.anim.lunbotu_left_in);
+        // 向左滑动右侧滑出的渐变效果（alpha 1.0  -> 0.1）
+        Animation lOutAnim = AnimationUtils.loadAnimation(this, R.anim.lunbotu_left_out);
 
-        // 为ViewFlipper去添加动画效果
-        flipper.setInAnimation(this, R.anim.push_left_in);
-        flipper.setOutAnimation(this, R.anim.push_left_out);
-        flipper.setFlipInterval(5000);
-        flipper.startFlipping();
-    }
-    //手势滑动画图
-    public boolean onTouchEvent(MotionEvent event) {
-// TODO Auto-generated method stub
-        switch (event.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-                startX = event.getX();
-                if(biaozhi==0){
-                    flipper.stopFlipping();
-                }
-                break;
-            case MotionEvent.ACTION_MOVE://判断向左滑动还是向右滑动
-                if (event.getX() - startX > 80) {
-                    biaozhi=2;
-                } else if (startX - event.getX() > 80) {
-                    biaozhi=3;
-                }
-                break;
-            case MotionEvent.ACTION_UP:
-                if(biaozhi==2){
-                    flipper.setInAnimation(this, R.anim.push_right_in);
-                    flipper.setOutAnimation(this, R.anim.push_right_out);
-                    flipper.showPrevious();
-                }
-                else if(biaozhi==3){
-                    flipper.setInAnimation(this, R.anim.push_left_in);
-                    flipper.setOutAnimation(this, R.anim.push_left_out);
-                    flipper.showNext();
-                }
-                biaozhi=1;    //必须变回1
-                /*flipper.startFlipping();*/   //滑动后取消自动换图
-                break;
+        ibvf.setInAnimation(lInAnim);
+        ibvf.setOutAnimation(lOutAnim);
+        // 设置自动播放功能
+        ibvf.setAutoStart(true);
+        if (ibvf.isAutoStart() && !ibvf.isFlipping()) {
+            ibvf.startFlipping();
         }
-        return super.onTouchEvent(event);
     }
+
+    @Override
+    public MarkView getMarkView() {
+        return markView;
+    }
+
 }

@@ -3,10 +3,22 @@
     android:layout_width="match_parent" android:layout_height="match_parent"
     android:orientation="vertical">
     <include layout="@layout/inc_demand_titlebar"/>
-    <ViewFlipper
-        android:id="@+id/vfliper_demand_sales_fliper"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="140dp"></ViewFlipper>
+        android:layout_height="wrap_content">
+        <cn.project.aoyolo.cooperation_v1.ui.xuqiu.ImageBrowsingViewFlipper
+            android:id="@+id/viewflipper"
+            android:layout_width="match_parent"
+            android:layout_height="140dp"/>
+
+        <cn.project.aoyolo.cooperation_v1.ui.xuqiu.MarkView
+            android:id="@+id/markView"
+            android:layout_alignBottom="@+id/viewflipper"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            />
+    </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="30dp"

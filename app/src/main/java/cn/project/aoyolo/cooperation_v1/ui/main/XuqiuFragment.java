@@ -5,10 +5,8 @@ package cn.project.aoyolo.cooperation_v1.ui.main;
         import android.view.LayoutInflater;
         import android.view.View;
         import android.view.ViewGroup;
-
         import com.lidroid.xutils.ViewUtils;
         import com.lidroid.xutils.view.annotation.event.OnClick;
-
         import cn.project.aoyolo.cooperation_v1.BaseFragment;
         import cn.project.aoyolo.cooperation_v1.R;
         import cn.project.aoyolo.cooperation_v1.ui.xuqiu.ActivityDemandSalas;
