@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="cn.project.aoyolo.cooperation_v1">
+    package="cn.project.aoyolo.cooperation_v1" >
 
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -8,16 +8,24 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_LOGS" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_CONFIGURATION" />
-    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-     <uses-feature android:name="android.hardware.Camera2"/>
-    <uses-feature android:name="android.hardware.Camera2.autofocus"/>
+     
+    <uses-feature android:name="android.hardware.Camera2" />
+    <uses-feature android:name="android.hardware.Camera2.autofocus" />
+
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+
+    <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+
     <application
         android:name=".App"
         android:allowBackup="true"
@@ -31,7 +39,7 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -60,16 +68,22 @@
         <activity android:name=".ui.my.yijianfankuiActivity"></activity>
         <!-- 推送设置 -->
         <activity android:name=".ui.my.TuisongSetttingActivity"></activity>
-        <!--我的信息-->
-        <activity android:name=".activity.MyInfoActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <!--我的信息选择照片-->
-        <activity android:name=".activity.ChoosePhoto"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <!--找需求模块-->
+        <activity
+            android:name=".ui.my.login.MyInfoActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <!-- 我的信息选择照片 -->
+        <activity
+            android:name=".ui.my.login.ChoosePhoto"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <!-- 注册 -->
+        <activity
+            android:name=".ui.my.login.RegisterActivity"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+        <!-- 找需求模块 -->
         <activity
             android:name=".ui.xuqiu.ActivityDemandSalas"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.xuqiu.ActivityDemandTrain"
             android:screenOrientation="portrait"></activity>
@@ -78,16 +92,27 @@
             android:screenOrientation="portrait"></activity>
         <activity
             android:name=".ui.xuqiu.ActivityDemandGroupbuying"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.xuqiu.ActivityDemandRental"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.xuqiu.ActivityDemandRecruit"
             android:screenOrientation="portrait"></activity>
         <activity
             android:name=".ui.fuwu.ChooseCityActivity"
             ></activity>
+            android:screenOrientation="portrait" />
+        <!-- 登陆界面 -->
+        <activity
+            android:name=".ui.my.login.Login2Activity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden" >
+        </activity>
+        <activity
+            android:name=".ui.my.login.LoginActivity"
+            android:label="@string/title_activity_login" >
+        </activity>
     </application>
 
 </manifest>

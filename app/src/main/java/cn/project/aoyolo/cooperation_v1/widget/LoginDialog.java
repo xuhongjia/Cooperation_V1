@@ -1,23 +1,19 @@
 package cn.project.aoyolo.cooperation_v1.widget;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import cn.project.aoyolo.cooperation_v1.ActivityManager;
 import cn.project.aoyolo.cooperation_v1.MainActivity;
 import cn.project.aoyolo.cooperation_v1.R;
+import cn.project.aoyolo.cooperation_v1.ui.my.login.Login2Activity;
 import cn.project.aoyolo.cooperation_v1.ui.my.login.LoginActivity;
-import cn.project.aoyolo.cooperation_v1.ui.my.login.RegisterActivity;
 
 /**
  *

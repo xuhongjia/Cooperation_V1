@@ -7,6 +7,8 @@
     <color name="colorMenuBarTextNor">#00bb9c</color>
     <color name="colorMenuBarTextSel">#9d55b8</color>
     <color name="colorToolBar">#3399CC</color>
+    <color name="colorToolBarPress">#553399CC</color>
+    <color name="colorToolBarNormal">#3399CC</color>
     <color name="spinnerText">#F4C600</color>
     <color name="spinnerText_nor">#B1B1B1</color>
     <color name="black_semi_transparent">#B2000000</color>
