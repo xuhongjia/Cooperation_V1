@@ -1,7 +1,7 @@
 package cn.project.aoyolo.cooperation_v1.ui.my;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
-import android.database.DataSetObserver;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -10,22 +10,19 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AlertDialog;
+import android.text.format.DateFormat;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.lidroid.xutils.ViewUtils;
-import com.lidroid.xutils.exception.HttpException;
-import com.lidroid.xutils.http.ResponseInfo;
-import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
 
@@ -35,7 +32,7 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.Calendar;
 import java.util.List;
 
 import cn.project.aoyolo.cooperation_v1.API.UpLoadFileApi;
@@ -86,7 +83,7 @@ public class JzfenleiActivity extends BaseActivity {
             data.add(s);
         }
     }
-    @OnClick({R.id.img_head,R.id.xzChoose,R.id.stopTime,R.id.send})
+    @OnClick({R.id.img_head,R.id.xzChoose,R.id.stopTime,R.id.send,R.id.back})
     public void onClick(View view){
         switch (view.getId())
         {
@@ -97,17 +94,41 @@ public class JzfenleiActivity extends BaseActivity {
                 xzChoose();
                 break;
             case R.id.stopTime:
+                stopTime();
                 break;
             case R.id.send:
                 send();
+                break;
+            case R.id.back:
+                finish();
                 break;
             default:
                 break;
         }
     }
+    //选择结束日期
+    public void stopTime(){
+        final Calendar calendar = Calendar.getInstance();
+        calendar.set(calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH)+1);
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                Calendar calendar1 = Calendar.getInstance();
+                calendar1.set(year,monthOfYear,dayOfMonth);
+                if(calendar1.compareTo(calendar)>0) {
+                    stopTime.setText(DateFormat.format("yyyy-MM-dd", calendar1));
+                }
+                else
+                {
+                    stopTime.setText(DateFormat.format("yyyy-MM-dd",calendar));
+                    Toast.makeText(JzfenleiActivity.this,"请选择至少比当前大一天的日期.....",Toast.LENGTH_LONG).show();
+                }
+            }
+        },calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH));
+        datePickerDialog.show();
+    }
     //选择薪资水平
     public void xzChoose(){
-
         myDialog = new AlertDialog.Builder(this).create();
         myDialog.show();
         myDialog.getWindow().setContentView(R.layout.my_alert_dialog);
@@ -123,6 +144,7 @@ public class JzfenleiActivity extends BaseActivity {
     }
     //发送提交请求
     public void send(){
+
         File file = new File(Environment.getExternalStorageDirectory(),IMAGE_FILE_NAME);
         try {
             BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(file));
@@ -145,6 +167,16 @@ public class JzfenleiActivity extends BaseActivity {
             }
         });
     }
+
+    //检查数据
+    public boolean CheckData(){
+        if(photo==null)
+        {
+
+        }
+        return false;
+    }
+
     //返回事件
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
