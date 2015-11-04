@@ -59,7 +59,7 @@ public class WheelView extends View {
     private int itemHeight = 0;
 
     // Center Line
-    private Drawable centerDrawable;
+    private Drawable centerDrawable;//fdf
 
     // Wheel drawables
     private int wheelBackground = R.drawable.wheel_bg;
@@ -760,7 +760,7 @@ public class WheelView extends View {
 
     /**
      * Scroll the wheel
-     * @param itemsToSkip items to scroll
+     * @param itemsToScroll items to scroll
      * @param time scrolling duration
      */
     public void scroll(int itemsToScroll, int time) {
