@@ -42,6 +42,7 @@ import cn.project.aoyolo.cooperation_v1.API.UpLoadFileApi;
 import cn.project.aoyolo.cooperation_v1.ActivityManager;
 import cn.project.aoyolo.cooperation_v1.BaseActivity;
 import cn.project.aoyolo.cooperation_v1.R;
+import cn.project.aoyolo.cooperation_v1.UserManager;
 import cn.project.aoyolo.cooperation_v1.entity.GeneralResponse;
 import cn.project.aoyolo.cooperation_v1.entity.HomeMaking;
 
@@ -106,10 +107,7 @@ public class JzfenleiActivity extends BaseActivity {
                 stopTime();
                 break;
             case R.id.send:
-                ActivityManager.removeActivity(ActivityManager.getTopActivity());
-                ActivityManager.getTopActivity().finish();
-                finish();
-                //send();
+                send();
                 break;
             case R.id.back:
                 finish();
@@ -184,13 +182,14 @@ public class JzfenleiActivity extends BaseActivity {
                         homeMaking.setType(type);
                         homeMaking.setVolume(0);
                         homeMaking.setEvaluationNumber(0);
-                        homeMaking.setuId(2);
+                        homeMaking.setuId(UserManager.getInstance().getUser().getId());
                         FuWuApi.addJzFuWu(gson.toJson(homeMaking), new HttpCallBack() {
                             @Override
                             public void onSuccess(String t) {
                                 super.onSuccess(t);
+                                ActivityManager.removeActivity(ActivityManager.getTopActivity());
                                 ActivityManager.getTopActivity().finish();
-                                ActivityManager.getTopActivity().finish();
+                                finish();
                             }
                             @Override
                             public void onFailure(int errorNo, String strMsg) {
