@@ -4,32 +4,22 @@
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
     android:orientation="vertical" >
-    <include layout="@layout/inc_my_info_header" />
+    <include
+        android:id="@+id/header"
+        layout="@layout/inc_my_info_header" />
     <!-- Login progress -->
-    <ProgressBar
-        android:id="@+id/login_progress"
-        style="?android:attr/progressBarStyleLarge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:visibility="gone" />
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         android:background="@drawable/register_back">
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="180dp">
-                <cn.project.aoyolo.cooperation_v1.widget.RoundCornerImageView
-                    android:layout_width="120dp"
-                    android:layout_height="120dp"
-                    android:src="@mipmap/head"
-                    android:scaleType="centerCrop"
-                    android:layout_centerInParent="true"
-                    app:roundHeight="60dp"
-                    app:roundWidth="60dp"/>
-        </RelativeLayout>
+        <ProgressBar
+            android:id="@+id/login_progress"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="8dp"
+            android:visibility="gone" />
         <ScrollView
             android:id="@+id/login_form"
             android:layout_width="match_parent"
@@ -96,5 +86,5 @@
 
             </LinearLayout>
         </ScrollView>
-    </LinearLayout>
+    </RelativeLayout>
 </LinearLayout>

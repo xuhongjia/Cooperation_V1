@@ -6,8 +6,8 @@ import cn.project.aoyolo.cooperation_v1.entity.User;
  * Created by Myy on 2015/11/4.
  */
 public class UserManager {
-    private static UserManager _userManager=null;
-    private User user;
+    private static UserManager _userManager ;
+    private User user=null;
     private UserManager(){
 
     }
@@ -23,5 +23,8 @@ public class UserManager {
     }
     public void setUser(User user){
         this.user=user;
+    }
+    public static boolean isLogin(){
+        return getInstance().getUser()!=null;
     }
 }

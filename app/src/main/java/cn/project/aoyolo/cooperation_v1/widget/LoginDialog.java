@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import cn.project.aoyolo.cooperation_v1.MainActivity;
 import cn.project.aoyolo.cooperation_v1.R;
-import cn.project.aoyolo.cooperation_v1.ui.my.login.Login2Activity;
 import cn.project.aoyolo.cooperation_v1.ui.my.login.LoginActivity;
 
 /**
