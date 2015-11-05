@@ -67,6 +67,8 @@ public class LoginActivity extends AppCompatActivity  {
     private TextView title;
     @ViewInject(R.id.header)
     private View header;
+    @ViewInject(R.id.my_info_back)
+    private View back;
     //Handler回调
     private Handler handler ;
     @Override
@@ -79,6 +81,12 @@ public class LoginActivity extends AppCompatActivity  {
     //初始化数据
     protected  void init(){
         title.setText("用户登录");
+        back.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         // Set up the login form.
         phoneView = (AutoCompleteTextView) findViewById(R.id.phone);
         text_phone=(TextInputLayout)findViewById(R.id.text_phone);
@@ -151,7 +159,6 @@ public class LoginActivity extends AppCompatActivity  {
             focusView = phoneView;
             cancel = true;
         }
-
         if (cancel) {
             //焦点在错误的输入框
             focusView.requestFocus();
