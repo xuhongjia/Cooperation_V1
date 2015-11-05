@@ -25,6 +25,9 @@ import java.lang.reflect.Field;
  * @author Myy
  */
 public class HttpParamsObject extends HttpParams{
+    public HttpParamsObject(){
+        super();
+    }
     public HttpParamsObject(Object object) {
         super();
         if(object == null)
