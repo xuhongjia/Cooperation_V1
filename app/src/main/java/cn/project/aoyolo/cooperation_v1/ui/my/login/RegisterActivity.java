@@ -1,6 +1,11 @@
 package cn.project.aoyolo.cooperation_v1.ui.my.login;
 
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.annotation.TargetApi;
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -13,6 +18,7 @@ import android.widget.TextView;
 
 
 import cn.project.aoyolo.cooperation_v1.BaseActivity;
+import cn.project.aoyolo.cooperation_v1.LoginManager;
 import cn.project.aoyolo.cooperation_v1.R;
 import cn.project.aoyolo.cooperation_v1.utils.MobUtils;
 import cn.project.aoyolo.cooperation_v1.utils.NetWorkUtils;
@@ -22,10 +28,11 @@ import cn.project.aoyolo.cooperation_v1.utils.NetWorkUtils;
  * 注册
  * Created by Hy on 2015/11/3.
  */
-public class RegisterActivity extends BaseActivity {
+public class RegisterActivity extends BaseActivity implements View.OnClickListener {
     private TextView tvTitle;
     private EditText etPhone, etPsw, etValid;
     private Button btRegister, btValid;
+    private View login_form,forget_passeord,mProgressView;;
     public static Handler handler;
     private Thread thread;
     private int countdown = 60;
@@ -37,7 +44,6 @@ public class RegisterActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register_layout);
-
         initView();
         initHandler();
         initThread();
@@ -91,8 +97,6 @@ public class RegisterActivity extends BaseActivity {
                     default:
                         return;
                 }
-
-
             }
         };
     }
@@ -123,44 +127,21 @@ public class RegisterActivity extends BaseActivity {
         initEtPhone();
         btRegister = (Button) findViewById(R.id.btRegister);
         btValid = (Button) findViewById(R.id.btValid);
-        initBtValid();
-        initBtRegister();
+        btValid.setOnClickListener(this);
+        btRegister.setOnClickListener(this);
+        forget_passeord = findViewById(R.id.forget_passeord);
+        login_form = findViewById(R.id.login_form);
+        forget_passeord.setOnClickListener(this);
+        login_form.setOnClickListener(this);
+        mProgressView = findViewById(R.id.register_progress);
     }
+    //全部按钮事件
+    @Override
+    public void onClick(View v) {
+        switch (v.getId())
+        {
+            case R.id.btValid: {
 
-    private void initBtRegister() {
-        btRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String phoneNumber = etPhone.getText().toString();
-                String validNumber = etValid.getText().toString();
-                if (NetWorkUtils.isNetworkAlive())
-                    MobUtils.validCode(phoneNumber, validNumber);
-                else
-                    showToast("请链接网络");
-            }
-        });
-    }
-
-    /**
-     * 验证验证码回调
-     */
-    private void validCallback() {
-        if (isValidTrue) {
-            //登录
-            showToast("正确");
-        } else {
-            showToast("验证码不对");
-
-        }
-    }
-
-    /**
-     * 获取验证码
-     */
-    private void initBtValid() {
-        btValid.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
                 if (btValid.isEnabled())
                     btValid.setEnabled(false);
                 String phoneNumber = etPhone.getText().toString();
@@ -168,10 +149,83 @@ public class RegisterActivity extends BaseActivity {
                     MobUtils.getVerifyCode(phoneNumber);
                 else
                     showToast("请链接网络");
-
-
             }
-        });
+            break;
+            case R.id.btRegister: {
+                showProgress(true);
+                String phoneNumber = etPhone.getText().toString();
+                String validNumber = etValid.getText().toString();
+                if (NetWorkUtils.isNetworkAlive())
+                    MobUtils.validCode(phoneNumber, validNumber);
+                else {
+                    showProgress(false);
+                    showToast("请链接网络");
+                }
+            }
+            break;
+            case R.id.forget_passeord:
+                //跳转到忘记密码界面
+                break;
+            case R.id.login_form:
+                startActivity(new Intent(this,LoginActivity.class));
+                finish();
+                break;
+            default:
+                break;
+        }
+    }
+    /**
+     * 显示Progress.
+     */
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
+    private void showProgress(final boolean show) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
+            int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
+            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+            mProgressView.animate().setDuration(shortAnimTime).alpha(
+                    show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+                }
+            });
+        } else {
+            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+        }
+    }
+    /**
+     * 验证验证码回调
+     */
+    private void validCallback() {
+        Handler handler = new Handler()
+        {
+            @Override
+            public void handleMessage(Message msg)
+            {
+                switch (msg.what)
+                {
+                    case LoginManager.LOGIN_SUCCESS:
+                        showProgress(false);
+                        finish();
+                        overridePendingTransition(R.anim.push_right_in,R.anim.push_right_out);
+                        break;
+                    case LoginManager.LOGIN_FAILED:
+                        showProgress(false);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        };
+        String phone = etPhone.getText().toString().trim();
+        String password = etPsw.getText().toString().trim();
+        if (isValidTrue) {
+            //登录
+            LoginManager.getInstence().login(phone,password,handler);
+            showToast("正确");
+        } else {
+            showToast("验证码不对");
+        }
     }
 
     private void initEtPhone() {
@@ -218,7 +272,6 @@ public class RegisterActivity extends BaseActivity {
             thread.start();
             isThreadRun = true;
         }
-
         isCountdown = true;
 
 
@@ -231,4 +284,6 @@ public class RegisterActivity extends BaseActivity {
         MobUtils.UnRegsiterHandler();
         isThreadBreak=true;
     }
+
+
 }

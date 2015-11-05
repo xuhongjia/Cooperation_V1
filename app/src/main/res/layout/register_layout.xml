@@ -5,117 +5,145 @@
     android:orientation="vertical">
 
     <include layout="@layout/inc_my_info_header" />
-
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/register_back">
-
+        android:layout_height="match_parent">
+        <ProgressBar
+            android:id="@+id/register_progress"
+            style="?android:attr/progressBarStyleLarge"
+            android:alpha="0.9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="8dp"
+            android:visibility="gone" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:alpha="0.8"
-            android:background="@color/half_black"
-            android:orientation="vertical">
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColorHint="@android:color/black">
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginTop="40dp"
-                    android:paddingLeft="5dp"
-                    android:id="@+id/etPhone"
-                    android:inputType="number"
-                    android:maxLength="11"
-                    android:hint="请输入手机号码" />
-            </android.support.design.widget.TextInputLayout>
+            android:background="@drawable/register_back">
 
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColorHint="@android:color/black">
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    android:paddingLeft="5dp"
-                    android:id="@+id/etPsw"
-                    android:inputType="textPassword"
-                    android:hint="请输入密码" />
-            </android.support.design.widget.TextInputLayout>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_marginTop="20dp"
-                android:layout_height="55dp"
-                android:weightSum="3"
-                android:orientation="horizontal"
-                >
+                android:layout_height="match_parent"
+                android:alpha="0.8"
+                android:background="@color/white"
+                android:orientation="vertical">
                 <android.support.design.widget.TextInputLayout
-                    android:textColorHint="@android:color/black"
-                    android:layout_width="0dp"
-                    android:layout_weight="2"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="20dp">
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:textColorHint="@android:color/black">
                     <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/etValid"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:paddingLeft="5dp"
+                        android:id="@+id/etPhone"
                         android:inputType="number"
-                        android:hint="请输入验证码" />
+                        android:maxLength="11"
+                        android:hint="请输入手机号码" />
                 </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="@android:color/black">
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:paddingLeft="5dp"
+                        android:id="@+id/etPsw"
+                        android:inputType="textPassword"
+                        android:hint="请输入密码" />
+                </android.support.design.widget.TextInputLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:layout_height="55dp"
+                    android:weightSum="3"
+                    android:orientation="horizontal"
+                    >
+                    <android.support.design.widget.TextInputLayout
+                        android:textColorHint="@android:color/black"
+                        android:layout_width="0dp"
+                        android:layout_weight="2"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="20dp">
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/etValid"
+                            android:inputType="number"
+                            android:hint="请输入验证码" />
+                    </android.support.design.widget.TextInputLayout>
+                    <Button
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="5dp"
+                        android:gravity="center"
+                        android:textColor="@android:color/white"
+                        android:background="@drawable/register_btn_selecter"
+                        android:id="@+id/btValid"
+                        android:text="获取验证码"
+                        android:enabled="false"
+                        android:layout_marginRight="20dp"/>
+                </LinearLayout>
                 <Button
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="5dp"
                     android:gravity="center"
                     android:textColor="@android:color/white"
                     android:background="@drawable/register_btn_selecter"
-                    android:id="@+id/btValid"
-                    android:text="获取验证码"
+                    android:text="注册"
                     android:enabled="false"
-                    android:layout_marginRight="20dp"/>
-            </LinearLayout>
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:gravity="center"
-                android:textColor="@android:color/white"
-                android:background="@drawable/register_btn_selecter"
-                android:text="注册"
-                android:enabled="false"
-                android:id="@+id/btRegister"
-                android:layout_marginRight="20dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="20dp"/>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:gravity="center"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
+                    android:id="@+id/btRegister"
+                    android:layout_marginRight="20dp"
                     android:layout_marginLeft="20dp"
-                    android:gravity="center"
-                    android:textColor="@color/white"
-                    android:textColorHint="@color/black"
-                    android:hint="已经有账号？点击" />
-                <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_marginTop="20dp"/>
+                <RelativeLayout
+                    android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:gravity="center"
-                    android:textColorHint="@android:color/holo_red_light"
-                    android:hint="登录"
-                    android:enabled="false"/>
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="10dp">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentLeft="true"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="40dp"
+                            android:layout_marginLeft="20dp"
+                            android:gravity="center"
+                            android:textColor="@color/white"
+                            android:textColorHint="@color/black"
+                            android:hint="已经有账号？点击" />
+                        <TextView
+                            android:id="@+id/login_form"
+                            android:layout_width="wrap_content"
+                            android:layout_height="40dp"
+                            android:gravity="center"
+                            android:clickable="true"
+                            android:textColorHint="@drawable/btn_login_press_selector"
+                            android:hint="登录"/>
+                    </LinearLayout>
+                    <TextView
+                        android:id="@+id/forget_passeord"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentRight="true"
+                        android:textColor="@drawable/btn_forget_password_press_setector"
+                        android:clickable="true"
+                        android:gravity="center"
+                        android:text="忘记密码？"/>
+                </RelativeLayout>
             </LinearLayout>
 
         </LinearLayout>
-
-    </LinearLayout>
+    </RelativeLayout>
 </LinearLayout>
