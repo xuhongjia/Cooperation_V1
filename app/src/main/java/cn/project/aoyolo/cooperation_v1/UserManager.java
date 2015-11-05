@@ -7,6 +7,7 @@ import cn.project.aoyolo.cooperation_v1.entity.User;
  */
 public class UserManager {
     private static UserManager _userManager ;
+    public static final String DEFAULT_HEADER="http://supplyandcommand.oss-cn-shenzhen.aliyuncs.com/3151553a-8da3-4455-a055-95e3ce9eadbb.jpg";
     private User user=null;
     private UserManager(){
 

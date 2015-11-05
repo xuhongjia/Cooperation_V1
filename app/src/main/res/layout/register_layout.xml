@@ -4,10 +4,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include layout="@layout/inc_my_info_header" />
+    <include
+        android:id="@+id/register_head"
+        layout="@layout/inc_my_info_header" />
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@drawable/register_back">
         <ProgressBar
             android:id="@+id/register_progress"
             style="?android:attr/progressBarStyleLarge"
@@ -18,6 +21,7 @@
             android:layout_marginBottom="8dp"
             android:visibility="gone" />
         <LinearLayout
+            android:id="@+id/register_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/register_back">
