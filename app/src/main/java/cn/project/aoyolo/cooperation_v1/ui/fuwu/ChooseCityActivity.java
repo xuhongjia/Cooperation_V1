@@ -1,22 +1,20 @@
 package cn.project.aoyolo.cooperation_v1.ui.fuwu;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
+import android.widget.ImageButton;
 
 import cn.project.aoyolo.cooperation_v1.R;
 import cn.project.aoyolo.cooperation_v1.adapter.ArrayWheelAdapter;
 import cn.project.aoyolo.cooperation_v1.widget.OnWheelChangedListener;
 import cn.project.aoyolo.cooperation_v1.widget.WheelView;
-
 public class ChooseCityActivity extends CityActivity implements View.OnClickListener, OnWheelChangedListener {
     private WheelView mViewProvince;
     private WheelView mViewCity;
     private WheelView mViewDistrict;
     private Button mBtnConfirm;
-
+    private ImageButton back;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +29,7 @@ public class ChooseCityActivity extends CityActivity implements View.OnClickList
         mViewCity = (WheelView) findViewById(R.id.id_city);
         mViewDistrict = (WheelView) findViewById(R.id.id_district);
         mBtnConfirm = (Button) findViewById(R.id.btn_confirm);
+        back=(ImageButton)findViewById(R.id.img_back_city);
     }
 
     private void setUpListener() {
@@ -42,6 +41,7 @@ public class ChooseCityActivity extends CityActivity implements View.OnClickList
         mViewDistrict.addChangingListener(this);
         // 添加onclick事件
         mBtnConfirm.setOnClickListener(this);
+        back.setOnClickListener(this);
     }
 
     private void setUpData() {
@@ -106,7 +106,10 @@ public class ChooseCityActivity extends CityActivity implements View.OnClickList
                 Intent data = new Intent();
                 String address= showSelectedResult();
                 data.putExtra("address", address);
-                setResult(0, data);
+                setResult(1, data);
+                finish();
+                break;
+            case R.id.img_back_city:
                 finish();
                 break;
             default:
@@ -115,8 +118,6 @@ public class ChooseCityActivity extends CityActivity implements View.OnClickList
     }
 
     private String showSelectedResult() {
-//        Toast.makeText(ChooseCityActivity.this, "当前选中:" + mCurrentProviceName + "," + mCurrentCityName + ","
-//                + mCurrentDistrictName + "," + mCurrentZipCode, Toast.LENGTH_SHORT).show();
         return mCurrentCityName+mCurrentDistrictName;
     }
 }

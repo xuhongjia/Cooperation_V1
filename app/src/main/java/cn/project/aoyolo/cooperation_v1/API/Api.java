@@ -29,7 +29,7 @@ public class Api
 
 
     //现在使用地址
-    public final static String NURL=HYGURL;
+    public final static String NURL=RURL;
 
 //    public static String readContentFromPost(URL url,String content) throws IOException{
 //        HttpURLConnection connection = (HttpURLConnection)url.openConnection();

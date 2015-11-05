@@ -110,9 +110,6 @@ public class FuwuFragment extends BaseFragment implements
         button3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(mContext, ChooseCityActivity.class);
-//                startActivity(intent);
-//                Toast.makeText(getContext(), address, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -122,8 +119,6 @@ public class FuwuFragment extends BaseFragment implements
     public void onLocationChanged(AMapLocation amapLocation) {
         if(amapLocation != null && amapLocation.getAMapException().getErrorCode() == 0){
             //获取位置信息
-            Double geoLat = amapLocation.getLatitude();
-            Double geoLng = amapLocation.getLongitude();
             address=amapLocation.getCity()+amapLocation.getDistrict();
            if(popupwindow2!=null) {
             tvGroup[4].setText(address);}
@@ -229,7 +224,7 @@ public class FuwuFragment extends BaseFragment implements
                 break;
             case R.id.btn_fuwu_choose:
                 Intent intent = new Intent(mContext, ChooseCityActivity.class);
-                startActivityForResult(intent, 0);
+                startActivityForResult(intent, 1);
                 break;
             case R.id.btn_fuwu_reset:
                 edt_fuwu_minprice.setText("");
@@ -265,16 +260,6 @@ public class FuwuFragment extends BaseFragment implements
         // 创建PopupWindow实例
         popupwindow = new PopupWindow(customView, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT,true);
         popupwindow.setBackgroundDrawable(new BitmapDrawable());
-        // 自定义view添加触摸事件
-//        customView.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View v, MotionEvent event) {
-//                if (popupwindow != null && popupwindow.isShowing()) {
-//                    popupwindow.dismiss();
-//                }
-//                return false;
-//            }
-//        });
         tv_fuwu_new=(TextView) customView.findViewById(R.id.tv_fuwu_new);
         tv_fuwu_pingjia=(TextView) customView.findViewById(R.id.tv_fuwu_pingjia);
         tv_fuwu_chengjiao=(TextView) customView.findViewById(R.id.tv_fuwu_chengjiao);
@@ -293,16 +278,6 @@ public class FuwuFragment extends BaseFragment implements
         // 创建PopupWindow实例
         popupwindow2 = new PopupWindow(customView2, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT,true);
         popupwindow2.setBackgroundDrawable(new BitmapDrawable());
-        // 自定义view添加触摸事件
-//        customView2.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View v, MotionEvent event) {
-//                if (popupwindow2 != null && popupwindow2.isShowing()) {
-//                    popupwindow2.dismiss();
-//                }
-//                return false;
-//            }
-//        });
         int tvID[] = new int[]{R.id.tv_fuwu_price100,R.id.tv_fuwu_price500,R.id.tv_fuwu_price500up,R.id.tv_fuwu_chooseadress,R.id.tv_fuwu_mapadress,R.id.tv_fuwu_leibie,R.id.tv_fuwu_jianzhi,R.id.tv_fuwu_zhaopin,R.id.tv_fuwu_jiaoyi
                 ,R.id.tv_fuwu_jiazheng,R.id.tv_fuwu_peixun,R.id.tv_fuwu_zufang,R.id.tv_fuwu_tuangou};
         tvGroup = new TextView[tvID.length];
@@ -329,9 +304,10 @@ public class FuwuFragment extends BaseFragment implements
         }
     }
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == 0 && resultCode == 0) {
+        if (requestCode == 1) {
+            if(resultCode == 1){
             String address_by_choose =data.getStringExtra("address");
-            tvGroup[3].setText(address_by_choose);
+            tvGroup[3].setText(address_by_choose);}
         }
     }
 }
