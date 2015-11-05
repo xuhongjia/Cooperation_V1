@@ -21,7 +21,6 @@ import org.kymjs.kjframe.http.HttpCallBack;
 
 import cn.project.aoyolo.cooperation_v1.API.UserApi;
 import cn.project.aoyolo.cooperation_v1.BaseActivity;
-import cn.project.aoyolo.cooperation_v1.LoginManager;
 import cn.project.aoyolo.cooperation_v1.R;
 import cn.project.aoyolo.cooperation_v1.UserManager;
 import cn.project.aoyolo.cooperation_v1.entity.User;
@@ -39,7 +38,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     private EditText etPhone, etPsw, etValid;
     private Button btRegister, btValid;
     private View login_form,forget_passeord,mProgressView,Register_view,Register_head;;
-    public static Handler handler;
+    public Handler handler;
     //private Thread thread;
     private int countdown = 60;
     private static final int COUNTDOWN = 0, SENDSMS = 1, VALIDSMSTRUE = 2, VALIDSMSFALSE = 3;
@@ -53,7 +52,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         initView();
         initHandler();
         //initThread();
-        MobUtils.init(this);
+        MobUtils.init(this,handler);
     }
 
 //    /**
@@ -173,11 +172,14 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
             }
             break;
             case R.id.forget_passeord:
-                //跳转到忘记密码界面
+                startActivity(new Intent(this,ForgetPasswordActivity.class));
+                finish();
+                overridePendingTransition(R.anim.push_left_in,R.anim.push_left_out);
                 break;
             case R.id.login_form:
                 startActivity(new Intent(this,LoginActivity.class));
                 finish();
+                overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
                 break;
             default:
                 break;
@@ -247,6 +249,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                     UserManager.getInstance().setUser(user);
                     showProgress(false);
                     finish();
+                    overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
                 }
                 @Override
                 public void onFailure(int errorNo, String strMsg) {

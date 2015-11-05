@@ -24,4 +24,11 @@ public class UserApi extends Api {
         HttpParamsObject params = new HttpParamsObject(user);
         httpBuilder.httpMethod(Request.HttpMethod.POST).url(url).params(params).callback(httpCallBack).useCache(true).request();
     }
+    public static void update_pwd(String phone,String password,HttpCallBack httpCallBack){
+        String url = NURL.concat("/action/user/update_pwd");
+        HttpParams params = new HttpParams();
+        params.put("account",phone);
+        params.put("password",password);
+        httpBuilder.httpMethod(Request.HttpMethod.POST).url(url).params(params).callback(httpCallBack).useCache(true).request();
+    }
 }
