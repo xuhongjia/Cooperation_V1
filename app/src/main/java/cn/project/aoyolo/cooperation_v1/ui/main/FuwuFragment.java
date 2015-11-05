@@ -224,7 +224,7 @@ public class FuwuFragment extends BaseFragment implements
                 break;
             case R.id.btn_fuwu_choose:
                 Intent intent = new Intent(mContext, ChooseCityActivity.class);
-                startActivityForResult(intent, 0);
+                startActivityForResult(intent, 1);
                 break;
             case R.id.btn_fuwu_reset:
                 edt_fuwu_minprice.setText("");
@@ -304,9 +304,10 @@ public class FuwuFragment extends BaseFragment implements
         }
     }
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == 0 && resultCode == 0) {
+        if (requestCode == 1) {
+            if(resultCode == 1){
             String address_by_choose =data.getStringExtra("address");
-            tvGroup[3].setText(address_by_choose);
+            tvGroup[3].setText(address_by_choose);}
         }
     }
 }
