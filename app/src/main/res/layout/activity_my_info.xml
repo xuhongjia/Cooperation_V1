@@ -111,6 +111,10 @@
                         android:text="学生"/>
                 </RelativeLayout>
             </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.3dp"
+                />
             <RelativeLayout
                 style="@style/my_info_relative"
                 >

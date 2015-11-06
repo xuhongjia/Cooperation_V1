@@ -10,7 +10,7 @@ public class User {
 	private String account;
 	private String password;
 	private String name;
-	private Integer age;
+	private Integer age; //0为男，1为女，2为未设置
 	private Integer sex;
 	private String job;
 	private Integer credit;
