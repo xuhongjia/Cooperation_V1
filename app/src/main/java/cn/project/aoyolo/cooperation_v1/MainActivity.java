@@ -183,6 +183,7 @@ public class MainActivity extends BaseActivity {
                 {
                     Intent intent=new Intent(MainActivity.this,MyInfoActivity.class);
                     startActivity(intent);
+                    overridePendingTransition(R.anim.push_left_in,R.anim.push_left_out);
                 }
                 drawerLayout.closeDrawers();
             }
@@ -258,6 +259,10 @@ public class MainActivity extends BaseActivity {
             User u = UserManager.getInstance().getUser();
             ImageUrlLoaderWithCache.getInstence().ImageLoad(u.getImg(),myInfoImageView);
             myInfoTextView.setText(u.getName().toString().trim());
+        }
+        else{
+            myInfoImageView.setImageDrawable(getResources().getDrawable(R.mipmap.defeat_header));
+            myInfoTextView.setText("未登录");
         }
     }
 }
