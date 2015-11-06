@@ -48,8 +48,6 @@ public class LoginDialog extends AlertDialog
     private void init()
     {
         view= LayoutInflater.from(c).inflate(R.layout.choose_login_layout,null);
-        ViewGroup.LayoutParams lp=new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
-        view.setLayoutParams(lp);
         initCancel();
         initWeiBoLogin();
         initWeiXinLogin();
@@ -58,6 +56,7 @@ public class LoginDialog extends AlertDialog
         initRegister();
         this.setView(view);
         this.setCanceledOnTouchOutside(true);
+
     }
 
     /**
