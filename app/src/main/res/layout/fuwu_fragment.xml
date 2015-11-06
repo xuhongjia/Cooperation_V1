@@ -60,7 +60,8 @@
         android:background="@color/colorMenuBarTextSel"/>
     <cn.project.aoyolo.cooperation_v1.widget.PullToRefreshLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:id="@+id/refresh_view">
         <include layout="@layout/refresh_head"/>
         <cn.project.aoyolo.cooperation_v1.widget.PullableListView
             android:layout_width="match_parent"

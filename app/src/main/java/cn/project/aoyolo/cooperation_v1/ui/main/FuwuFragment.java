@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,12 +39,15 @@ import cn.project.aoyolo.cooperation_v1.entity.GeneralResponse;
 import cn.project.aoyolo.cooperation_v1.entity.QueryEntity;
 import cn.project.aoyolo.cooperation_v1.ui.fuwu.ChooseCityActivity;
 import cn.project.aoyolo.cooperation_v1.widget.Common.CommonAdapter;
+import cn.project.aoyolo.cooperation_v1.widget.Common.ViewHolder;
+import cn.project.aoyolo.cooperation_v1.widget.PullToRefreshLayout;
+import cn.project.aoyolo.cooperation_v1.widget.PullableListView;
 
 /**
  * Created by yubin on 2015/10/28.
  */
 public class FuwuFragment extends BaseFragment implements
-        AMapLocationListener ,View.OnClickListener {
+        AMapLocationListener ,View.OnClickListener ,PullToRefreshLayout.OnRefreshListener{
     private LocationManagerProxy mLocationManagerProxy;
     private PopupWindow popupwindow;
     private PopupWindow popupwindow2;
@@ -65,6 +69,8 @@ public class FuwuFragment extends BaseFragment implements
     private Button btn_fuwu_choose;
     private int flag;
     private int index;
+    private PullableListView listView;
+    private PullToRefreshLayout ptrl;
     private final ArrayList<Common> commons=new ArrayList<Common>();
     private CommonAdapter<Common> adapter_commons;
     private QueryEntity queryEntity=new QueryEntity();
@@ -134,14 +140,25 @@ public class FuwuFragment extends BaseFragment implements
             public void onClick(View v) {
             }
         });
+        listView=(PullableListView)view.findViewById(R.id.listview_order);
+        ptrl = ((PullToRefreshLayout)view.findViewById(R.id.refresh_view));
+        ptrl.setOnRefreshListener(this);
         flag=0;
-        index=19;
+        index=20;
         Date d = new Date();
         long searchTime = d.getTime();
         queryEntity.setFlag(flag);
         queryEntity.setIndex(index);
-        queryEntity.setSearchTime(searchTime);
+        queryEntity.setSearchTime(1);
         getAllFuwu(queryEntity);
+        adapter_commons=new CommonAdapter<Common>(getContext(),commons,R.layout.listview_item_mian) {
+            @Override
+            public void convert(ViewHolder helper, Common item) {
+                helper.setText(R.id.tv_circle_username, item.getName());
+            }
+        };
+        listView.setAdapter(adapter_commons);
+        index+=20;
     }
 
     @Override
@@ -348,6 +365,10 @@ public class FuwuFragment extends BaseFragment implements
                 if(response.isSuccess()) {
                     commons.clear();
                     commons.addAll(response.getData());
+                    adapter_commons.notifyDataSetChanged();
+                }
+                else {
+                    Toast.makeText(getContext(),"获取失败",Toast.LENGTH_SHORT).show();
                 }
             }
             @Override
@@ -355,5 +376,15 @@ public class FuwuFragment extends BaseFragment implements
                 super.onFailure(errorNo, strMsg);
             }
         });
+    }
+//下拉刷新
+    @Override
+    public void onRefresh(PullToRefreshLayout pullToRefreshLayout) {
+        pullToRefreshLayout.refreshFinish(PullToRefreshLayout.SUCCEED);
+    }
+//上拉加载
+    @Override
+    public void onLoadMore(PullToRefreshLayout pullToRefreshLayout) {
+        pullToRefreshLayout.loadmoreFinish(PullToRefreshLayout.SUCCEED);
     }
 }
