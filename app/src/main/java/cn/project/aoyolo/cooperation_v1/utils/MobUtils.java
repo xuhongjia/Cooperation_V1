@@ -1,6 +1,7 @@
 package cn.project.aoyolo.cooperation_v1.utils;
 
 import android.content.Context;
+import android.os.Handler;
 
 import cn.project.aoyolo.cooperation_v1.ui.my.login.RegisterActivity;
 import cn.smssdk.EventHandler;
@@ -17,12 +18,11 @@ public class MobUtils {
     private static String country = "86";
     private static final int SENDSMS = 1, VALIDSMSTRUE = 2, VALIDSMSFALSE = 3;
 
-    public static void init(Context c) {
+    public static void init(Context c,Handler handle) {
 
         try {
             SMSSDK.initSDK(c, appKey, appSecret);
-
-            initHandler();
+            initHandler(handle);
             SMSSDK.registerEventHandler(handler);
         } catch (Exception e) {
 
@@ -30,29 +30,23 @@ public class MobUtils {
 
     }
 
-    private static void initHandler() {
+    private static void initHandler(final Handler handle) {
         handler = new EventHandler() {
             @Override
             public void afterEvent(int event, int result, Object data) {
-
-
                 if (result == SMSSDK.RESULT_COMPLETE) {
-
                     if (event == SMSSDK.EVENT_SUBMIT_VERIFICATION_CODE) {//提交验证码成功
-                        RegisterActivity.handler.sendEmptyMessage(VALIDSMSTRUE);
+                        handle.sendEmptyMessage(VALIDSMSTRUE);
                     } else if (event == SMSSDK.EVENT_GET_VERIFICATION_CODE) {
-                        RegisterActivity.handler.sendEmptyMessage(SENDSMS);
+                        handle.sendEmptyMessage(SENDSMS);
                     } else if (event == SMSSDK.EVENT_GET_SUPPORTED_COUNTRIES) {//返回支持发送验证码的国家列表
-
 
                     }
                 } else {
                     ((Throwable) data).printStackTrace();
-                    RegisterActivity.handler.sendEmptyMessage(VALIDSMSFALSE);
+                    handle.sendEmptyMessage(VALIDSMSFALSE);
                 }
             }
-
-
         };
 
     }
@@ -63,7 +57,6 @@ public class MobUtils {
     public static void UnRegsiterHandler() {
         SMSSDK.unregisterAllEventHandler();
     }
-
     /**
      * 获取短信验证码
      *

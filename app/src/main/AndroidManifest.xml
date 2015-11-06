@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="cn.project.aoyolo.cooperation_v1">
+    package="cn.project.aoyolo.cooperation_v1" >
+
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -37,10 +38,11 @@
         android:icon="@mipmap/app_logo"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme.NoActionBar">
+        android:theme="@style/AppTheme.NoActionBar" >
         <meta-data
             android:name="com.amap.api.v2.apikey"
             android:value="cb727163f275ceba6a6548d29d8bb867" />
+
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
@@ -51,28 +53,30 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!--服务分类界面-->
-        <activity android:name=".ui.my.FenleiActivity"></activity>
-        <!--发布招聘界面-->
-        <activity android:name=".ui.my.ZpfenleiActivity"></activity>
-        <!--发布交易界面-->
-        <activity android:name=".ui.my.JyfenleiActivity"></activity>
-        <!--发布培训界面-->
-        <activity android:name=".ui.my.PxfenleiActivity"
+        <!-- 服务分类界面 -->
+        <activity android:name=".ui.my.FenleiActivity" />
+        <!-- 发布招聘界面 -->
+        <activity android:name=".ui.my.ZpfenleiActivity" />
+        <!-- 发布交易界面 -->
+        <activity android:name=".ui.my.JyfenleiActivity" />
+        <!-- 发布培训界面 -->
+        <activity
+            android:name=".ui.my.PxfenleiActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan|stateHidden"></activity>
-        <!--发布家政界面-->
-        <activity android:name=".ui.my.JzfenleiActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <!-- 发布家政界面 -->
+        <activity
+            android:name=".ui.my.JzfenleiActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan|stateHidden"></activity>
-        <!--发布租房界面-->
-        <activity android:name=".ui.my.ZffenleiActivity"></activity>
-        <!--发布团购界面-->
-        <activity android:name=".ui.my.TgfenleiActivity"></activity>
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <!-- 发布租房界面 -->
+        <activity android:name=".ui.my.ZffenleiActivity" />
+        <!-- 发布团购界面 -->
+        <activity android:name=".ui.my.TgfenleiActivity" />
         <!-- 意见反馈 -->
-        <activity android:name=".ui.my.yijianfankuiActivity"></activity>
+        <activity android:name=".ui.my.yijianfankuiActivity" />
         <!-- 推送设置 -->
-        <activity android:name=".ui.my.TuisongSetttingActivity"></activity>
+        <activity android:name=".ui.my.TuisongSetttingActivity" />
         <activity
             android:name=".ui.my.login.MyInfoActivity"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -91,10 +95,10 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.xuqiu.ActivityDemandTrain"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.xuqiu.ActivityDemandHousekeeping"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.xuqiu.ActivityDemandGroupbuying"
             android:screenOrientation="portrait" />
@@ -103,20 +107,19 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.xuqiu.ActivityDemandRecruit"
-            android:screenOrientation="portrait"></activity>
-
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.mob.tools.MobUIShell"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:windowSoftInputMode="stateHidden|adjustResize"/>
-        <activity
-            android:name=".ui.fuwu.ChooseCityActivity"
-            ></activity>
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity android:name=".ui.fuwu.ChooseCityActivity" />
         <!-- 登陆界面 -->
         <activity
             android:name=".ui.my.login.LoginActivity"
             android:label="@string/title_activity_login" >
+        </activity>
+        <activity android:name=".ui.my.login.ForgetPasswordActivity" >
         </activity>
     </application>
 

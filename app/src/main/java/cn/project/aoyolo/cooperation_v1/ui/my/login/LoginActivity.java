@@ -40,6 +40,7 @@ import com.lidroid.xutils.view.annotation.ViewInject;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.project.aoyolo.cooperation_v1.BaseActivity;
 import cn.project.aoyolo.cooperation_v1.LoginManager;
 import cn.project.aoyolo.cooperation_v1.R;
 
@@ -48,7 +49,7 @@ import static android.Manifest.permission.READ_CONTACTS;
 /**
  * A login screen that offers login via email/password.
  */
-public class LoginActivity extends AppCompatActivity  {
+public class LoginActivity extends BaseActivity  {
 
 
     //注入控件

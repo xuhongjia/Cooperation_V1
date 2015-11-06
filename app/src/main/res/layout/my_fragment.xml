@@ -63,7 +63,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_gravity="bottom|right"
-        fab:fab_addButtonColorNormal="@color/white"
+        fab:fab_addButtonColorNormal="@color/white_nor"
         fab:fab_addButtonColorPressed="@color/white_pressed"
         fab:fab_addButtonPlusIconColor="@color/half_black"
         fab:fab_labelStyle="@style/menu_labels_style"
@@ -74,7 +74,7 @@
             android:id="@+id/action_a"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            fab:fab_colorNormal="@color/white"
+            fab:fab_colorNormal="@color/white_nor"
             fab:fab_title="发布服务"
             fab:fab_colorPressed="@color/white_pressed"
             android:src="@mipmap/fuwu_nor_32px"/>
@@ -82,7 +82,7 @@
             android:id="@+id/action_b"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            fab:fab_colorNormal="@color/white"
+            fab:fab_colorNormal="@color/white_nor"
             fab:fab_title="发布需求"
             fab:fab_colorPressed="@color/white_pressed"
             android:src="@mipmap/xuqiu_nor_32px"/>
