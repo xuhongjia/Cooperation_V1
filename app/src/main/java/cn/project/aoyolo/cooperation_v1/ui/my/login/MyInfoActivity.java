@@ -5,6 +5,8 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -15,6 +17,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
@@ -57,8 +60,7 @@ public class MyInfoActivity extends BaseActivity
     private ImageView imageView;
     @ViewInject(R.id.textView)
     private TextView textView;
-    @ViewInject(R.id.logout)
-    private View logout;
+    private Bitmap photo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,8 +68,8 @@ public class MyInfoActivity extends BaseActivity
         ViewUtils.inject(this);
         textView.setVisibility(View.GONE);
         initData();
-        initView();
-        initChooseDialog();
+//        initView();
+//        initChooseDialog();
     }
     public void initData(){
         if(UserManager.isLogin())
@@ -99,11 +101,12 @@ public class MyInfoActivity extends BaseActivity
 
     //点击事件
     @OnClick({R.id.imageView,R.id.my_info_name,R.id.my_info_phone,R.id.my_info_sex,R.id.my_info_age,R.id.my_info_address,
-            R.id.my_info_job,R.id.logout,R.id.my_info_back})
+            R.id.my_info_job,R.id.my_info_back})
     public void onClick(View view){
         switch (view.getId())
         {
             case R.id.imageView:
+                setImg();
                 break;
             case R.id.my_info_name:
                 break;
@@ -117,10 +120,6 @@ public class MyInfoActivity extends BaseActivity
                 break;
             case R.id.my_info_job:
                 break;
-            case R.id.logout:
-                UserManager.getInstance().setUser(null);
-                finish();
-                break;
             case R.id.my_info_back:
                 finish();
                 break;
@@ -128,101 +127,131 @@ public class MyInfoActivity extends BaseActivity
                 break;
         }
     }
-    //初始化界面
-    private void initView() {
-        initChooseDialog();
-        imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!chooseDialog.isShowing())
-                    chooseDialog.show();
-            }
-        });
-    }
-
-    /**
-     * 初始化选择功能弹出窗口
-     */
-    private void initChooseDialog() {
-
-        View view= LayoutInflater.from(MyInfoActivity.this).inflate(R.layout.myinfo_choose_layout,null);
-        ViewGroup.LayoutParams lp=new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
-        view.setLayoutParams(lp);
-        btCancle=(Button)view.findViewById(R.id.cancel);
-        btTakePhoto=(Button)view.findViewById(R.id.btTakePhoto);
-        btChoosePhoto=(Button)view.findViewById(R.id.btChoosePhoto);
-        initBtCancle();
-        initBtChoosePhoto();
-        initTakePhoto();
-        chooseDialog=new AlertDialog.Builder(MyInfoActivity.this).setView(view).create();
-        chooseDialog.setCanceledOnTouchOutside(true);//点击屏幕外消失
-        Window window=chooseDialog.getWindow();
-        window.setGravity(Gravity.BOTTOM);
-
-    }
-
-    /**
-     * 照相
-     */
-    private void initTakePhoto()
-    {
-        btTakePhoto.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivityForResult(new Intent("android.media.action.IMAGE_CAPTURE"), TAKE_PHOTO);
-            }
-        });
-    }
-
-    /**
-     * 从相册中选择
-     */
-    private void initBtChoosePhoto() {
-        btChoosePhoto.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(MyInfoActivity.this, ChoosePhoto.class);
-                startActivity(i);
-            }
-        });
-
-    }
-
-    /**
-     * 取消
-     */
-    private void initBtCancle() {
-        btCancle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (chooseDialog.isShowing())
-                    chooseDialog.dismiss();
-            }
-        });
-
-    }
-
-    /**
-     * 返回键
-     * @param view
-     */
-    public void back(View view)
-    {
-        finish();
-
-    }
+//    //初始化界面
+//    private void initView() {
+//        initChooseDialog();
+//        imageView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (!chooseDialog.isShowing())
+//                    chooseDialog.show();
+//            }
+//        });
+//    }
+//
+//    /**
+//     * 初始化选择功能弹出窗口
+//     */
+//    private void initChooseDialog() {
+//
+//        View view= LayoutInflater.from(MyInfoActivity.this).inflate(R.layout.myinfo_choose_layout,null);
+//        ViewGroup.LayoutParams lp=new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+//        view.setLayoutParams(lp);
+//        btCancle=(Button)view.findViewById(R.id.cancel);
+//        btTakePhoto=(Button)view.findViewById(R.id.btTakePhoto);
+//        btChoosePhoto=(Button)view.findViewById(R.id.btChoosePhoto);
+//        initBtCancle();
+//        initBtChoosePhoto();
+//        initTakePhoto();
+//        chooseDialog=new AlertDialog.Builder(MyInfoActivity.this).setView(view).create();
+//        chooseDialog.setCanceledOnTouchOutside(true);//点击屏幕外消失
+//        Window window=chooseDialog.getWindow();
+//        window.setGravity(Gravity.BOTTOM);
+//
+//    }
+//
+//    /**
+//     * 照相
+//     */
+//    private void initTakePhoto()
+//    {
+//        btTakePhoto.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                startActivityForResult(new Intent("android.media.action.IMAGE_CAPTURE"), TAKE_PHOTO);
+//            }
+//        });
+//    }
+//
+//    /**
+//     * 从相册中选择
+//     */
+//    private void initBtChoosePhoto() {
+//        btChoosePhoto.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent i = new Intent(MyInfoActivity.this, ChoosePhoto.class);
+//                startActivity(i);
+//            }
+//        });
+//
+//    }
+//
+//    /**
+//     * 取消
+//     */
+//    private void initBtCancle() {
+//        btCancle.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (chooseDialog.isShowing())
+//                    chooseDialog.dismiss();
+//            }
+//        });
+//
+//    }
+//
+//    /**
+//     * 返回键
+//     * @param view
+//     */
+//    public void back(View view)
+//    {
+//        finish();
+//
+//    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
     {
-        if(requestCode==TAKE_PHOTO)
-            if(resultCode==RESULT_OK)
-            {
-                bitmap=(Bitmap)data.getExtras().get("data");
-                imageView.setImageBitmap(bitmap);
-                if(chooseDialog.isShowing())
-                    chooseDialog.dismiss();
-            }
+//        if(requestCode==TAKE_PHOTO)
+//            if(resultCode==RESULT_OK)
+//            {
+//                bitmap=(Bitmap)data.getExtras().get("data");
+//                imageView.setImageBitmap(bitmap);
+//                if(chooseDialog.isShowing())
+//                    chooseDialog.dismiss();
+//            }
+        if (resultCode != RESULT_OK) {
+            return;
+        } else {
+            switch (requestCode) {
+                case IMAGE_REQUEST_CODE:
+                    resizeImage(data.getData());
+                    break;
+                case CAMERA_REQUEST_CODE:
+                    if (isSdcardExisting()) {
+                        resizeImage(getImageUri());
+                    } else {
+                        Toast.makeText(this, "未找到存储卡，无法存储照片！",
+                                Toast.LENGTH_LONG).show();
+                    }
+                    break;
 
+                case RESIZE_REQUEST_CODE:
+                    if (data != null) {
+                        showResizeImage(data);
+                    }
+                    break;
+            }
+        }
+    }
+    private void showResizeImage(Intent data)  {
+        Bundle extras = data.getExtras();
+        if (extras != null) {
+            photo = extras.getParcelable("data");
+            Drawable drawable = new BitmapDrawable(imageView.getResources(),photo);
+            imageView.setImageDrawable(drawable);
+        }
     }
 }

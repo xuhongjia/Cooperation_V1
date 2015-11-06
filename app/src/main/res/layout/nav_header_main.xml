@@ -11,13 +11,13 @@
 
     <cn.project.aoyolo.cooperation_v1.widget.RoundCornerImageView
         android:id="@+id/imageView"
-        android:layout_width="90dp"
-        android:layout_height="90dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_centerVertical="true"
         android:scaleType="centerCrop"
         android:src="@mipmap/defeat_header"
-        app:roundHeight="45dp"
-        app:roundWidth="45dp" />
+        app:roundHeight="50dp"
+        app:roundWidth="50dp" />
 
     <TextView
         android:id="@+id/textView"
