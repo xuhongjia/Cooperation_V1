@@ -310,4 +310,7 @@ public class FuwuFragment extends BaseFragment implements
             tvGroup[3].setText(address_by_choose);}
         }
     }
+    public void getAllFuwu(){
+
+    }
 }
