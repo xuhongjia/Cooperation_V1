@@ -1,9 +1,7 @@
 package cn.project.aoyolo.cooperation_v1.API;
-
 import org.kymjs.kjframe.http.HttpCallBack;
 import org.kymjs.kjframe.http.HttpParams;
 import org.kymjs.kjframe.http.Request;
-
 /**
  * Created by Myy on 2015/11/3.
  */
@@ -13,5 +11,11 @@ public class FuWuApi extends Api {
         HttpParams param = new HttpParams();
         param.put("params",params);
         httpBuilder.httpMethod(Request.HttpMethod.POST).url(url).params(param).useCache(true).callback(httpCallBack).request();
+    }
+    public static void selectAllFuWu(int number , HttpCallBack httpCallBack){
+        String url = NURL.concat("/action/user/login");
+        HttpParams param = new HttpParams();
+        param.put("params",number);
+        httpBuilder.httpMethod(Request.HttpMethod.POST).url(url).params(param).callback(httpCallBack).useCache(true).request();
     }
 }
