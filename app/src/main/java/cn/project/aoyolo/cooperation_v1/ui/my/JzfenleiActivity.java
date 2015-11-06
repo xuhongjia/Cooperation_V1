@@ -177,7 +177,7 @@ public class JzfenleiActivity extends BaseActivity {
                         homeMaking.setPublishTime(System.currentTimeMillis());
                         homeMaking.setPhone(phone.getText().toString().trim());
                         homeMaking.setStopTime(stopCalendar.getTimeInMillis());
-                        homeMaking.setSalary(xzChoose.getText().toString().trim());
+                        homeMaking.setSalary(new Float(xzChoose.getText().toString().trim()));
                         int type = getJzType(jzType.getCheckedRadioButtonId());
                         homeMaking.setType(type);
                         homeMaking.setVolume(0);

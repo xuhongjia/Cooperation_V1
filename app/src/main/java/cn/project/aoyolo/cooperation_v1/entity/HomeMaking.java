@@ -9,7 +9,7 @@ public class HomeMaking {
 	private Integer id;
 	private String name;
 	private Integer type;//0为保姆，1为月嫂，2为钟点工
-	private String salary;
+	private float salary;
 	private String note;
 	private String img;
 	private int flag;//0表示服务，1表示需求
@@ -18,7 +18,17 @@ public class HomeMaking {
 	private String phone;
 	private int uId;
 	private int volume;
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
 	private int evaluationNumber;
+	private String address;
 	public int getuId() {
 		return uId;
 	}
@@ -81,10 +91,10 @@ public class HomeMaking {
 	public void setType(Integer type) {
 		this.type = type;
 	}
-	public String getSalary() {
+	public float getSalary() {
 		return salary;
 	}
-	public void setSalary(String salary) {
+	public void setSalary(float salary) {
 		this.salary = salary;
 	}
 	public String getNote() {

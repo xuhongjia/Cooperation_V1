@@ -8,7 +8,7 @@ package cn.project.aoyolo.cooperation_v1.entity;
 public class Recruiting {
 	private Integer id;
 	private String name;
-	private String salary;
+	private float salary;
 	private String welfare;
 	private String address;
 	private String demand;
@@ -54,10 +54,10 @@ public class Recruiting {
 		this.id = id;
 	}
 	
-	public String getSalary() {
+	public float getSalary() {
 		return salary;
 	}
-	public void setSalary(String salary) {
+	public void setSalary(float salary) {
 		this.salary = salary;
 	}
 	public String getWelfare() {
