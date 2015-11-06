@@ -101,25 +101,29 @@ public class MyInfoActivity extends BaseActivity
     }
 
     //点击事件
-    @OnClick({R.id.imageView,R.id.name,R.id.phone,R.id.sex,R.id.age,R.id.address,
+    @OnClick({R.id.imageView,R.id.name,R.id.sex,R.id.age,R.id.address,
             R.id.job,R.id.my_info_back})
     public void onClick(View view){
+        Intent intent = new Intent(this,MyInfoItemActivity.class);
         switch (view.getId())
         {
             case R.id.imageView:
                 setImg();
                 break;
             case R.id.name:
-                break;
-            case R.id.phone:
+                intent.putExtra("flag",1);
                 break;
             case R.id.sex:
+                intent.putExtra("flag",2);
                 break;
             case R.id.age:
+                intent.putExtra("flag",3);
                 break;
             case R.id.address:
+                intent.putExtra("flag",4);
                 break;
             case R.id.job:
+                intent.putExtra("flag",5);
                 break;
             case R.id.my_info_back:
                 finish();
@@ -127,6 +131,7 @@ public class MyInfoActivity extends BaseActivity
             default:
                 break;
         }
+        startActivity(intent);
     }
 //    //初始化界面
 //    private void initView() {

@@ -42,6 +42,7 @@
                 <RelativeLayout
                     android:id="@+id/phone"
                     style="@style/my_info_relative"
+                    android:clickable="false"
                     >
                     <TextView
                         style="@style/my_info_item_left_textview"
@@ -49,6 +50,7 @@
                     <TextView
                         android:id="@+id/my_info_phone"
                         style="@style/my_info_item_right_textview"
+                        android:drawableRight="@null"
                         android:text="1313131313"
                         />
                 </RelativeLayout>
@@ -128,6 +130,7 @@
                 />
             <RelativeLayout
                 style="@style/my_info_relative"
+                android:clickable="false"
                 >
                 <TextView
                     style="@style/my_info_item_left_textview"
