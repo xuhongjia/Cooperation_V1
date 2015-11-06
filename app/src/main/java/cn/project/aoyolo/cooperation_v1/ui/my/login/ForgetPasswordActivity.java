@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -11,6 +12,7 @@ import android.os.Message;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -33,6 +35,7 @@ import cn.project.aoyolo.cooperation_v1.entity.User;
 import cn.project.aoyolo.cooperation_v1.utils.MobUtils;
 import cn.project.aoyolo.cooperation_v1.utils.NetWorkUtils;
 import cn.project.aoyolo.cooperation_v1.utils.TimeCount;
+import cn.smssdk.SMSSDK;
 
 public class ForgetPasswordActivity extends BaseActivity {
 
@@ -57,7 +60,7 @@ public class ForgetPasswordActivity extends BaseActivity {
     private TimeCount time;
     private Handler handler;
     private static final int  SENDSMS = 1, VALIDSMSTRUE = 2, VALIDSMSFALSE = 3;
-    private boolean isValidTrue = false, isThreadRun = false,isThreadBreak=false;
+    private boolean isValidTrue = false, isThreadRun = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,11 +68,11 @@ public class ForgetPasswordActivity extends BaseActivity {
         ViewUtils.inject(this);
         init();
         initHandler();
-        MobUtils.init(this, handler);
+        MobUtils.init(ForgetPasswordActivity.this, handler);
     }
     //初始化数据
     private void init(){
-        time=new TimeCount(60000,1000,btValid,bt_rest_password);
+        time=new TimeCount(60000,1000,btValid);
         initEtPhone();
     }
     //初始化handler
@@ -99,8 +102,8 @@ public class ForgetPasswordActivity extends BaseActivity {
      * 验证验证码回调
      */
     private void validCallback() {
-        final String phone = etPhone.getText().toString().trim();
-        final String password = etPsw.getText().toString().trim();
+        String phone = etPhone.getText().toString().trim();
+        String password = etPsw.getText().toString().trim();
         if (isValidTrue) {
             UserApi.update_pwd(phone, password, new HttpCallBack() {
                 @Override
@@ -108,6 +111,9 @@ public class ForgetPasswordActivity extends BaseActivity {
                     super.onSuccess(t);
                     GeneralResponse<User> response = new Gson().fromJson(t,new TypeToken<GeneralResponse<User>>(){}.getType());
                     UserManager.getInstance().setUser(response.getData());
+                    MobUtils.UnRegsiterHandler();
+                    finish();
+                    overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
                 }
                 @Override
                 public void onFailure(int errorNo, String strMsg) {
@@ -117,6 +123,7 @@ public class ForgetPasswordActivity extends BaseActivity {
             showToast("正确");
         } else {
             showToast("验证码不对");
+            showProgress(false);
         }
     }
     @OnClick({R.id.btValid,R.id.bt_rest_password,})
@@ -145,6 +152,10 @@ public class ForgetPasswordActivity extends BaseActivity {
                     showProgress(false);
                     showToast("请链接网络");
                 }
+                InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                inputMethodManager.hideSoftInputFromWindow(etPhone.getWindowToken(),0);
+                inputMethodManager.hideSoftInputFromWindow(etPsw.getWindowToken(),0);
+                inputMethodManager.hideSoftInputFromWindow(etValid.getWindowToken(),0);
             }
             break;
             default:
@@ -234,7 +245,6 @@ public class ForgetPasswordActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        MobUtils.UnRegsiterHandler();
-        isThreadBreak=true;
+
     }
 }

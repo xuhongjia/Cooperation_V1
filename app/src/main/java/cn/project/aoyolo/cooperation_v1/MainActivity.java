@@ -1,6 +1,8 @@
 package cn.project.aoyolo.cooperation_v1;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -19,8 +21,12 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
+
+import org.kymjs.kjframe.KJBitmap;
+import org.kymjs.kjframe.bitmap.BitmapCallBack;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,12 +34,14 @@ import java.util.List;
 
 import cn.project.aoyolo.cooperation_v1.API.Api;
 import cn.project.aoyolo.cooperation_v1.entity.Search;
+import cn.project.aoyolo.cooperation_v1.entity.User;
 import cn.project.aoyolo.cooperation_v1.ui.main.FuwuFragment;
 import cn.project.aoyolo.cooperation_v1.ui.main.MyFragment;
 import cn.project.aoyolo.cooperation_v1.ui.main.XuqiuFragment;
 import cn.project.aoyolo.cooperation_v1.ui.my.login.MyInfoActivity;
 import cn.project.aoyolo.cooperation_v1.ui.my.login.RegisterActivity;
 import cn.project.aoyolo.cooperation_v1.utils.HttpUtils;
+import cn.project.aoyolo.cooperation_v1.utils.ImageUrlLoaderWithCache;
 import cn.project.aoyolo.cooperation_v1.widget.CommonFragmentPagerAdapter;
 import cn.project.aoyolo.cooperation_v1.widget.LoginDialog;
 import cn.project.aoyolo.cooperation_v1.widget.RoundCornerImageView;
@@ -49,6 +57,7 @@ public class MainActivity extends BaseActivity {
     private RadioButton rbGroup[];
     private List<Fragment> mPagesFragments;
     private RoundCornerImageView myInfoImageView;
+    private TextView myInfoTextView;
     public static Handler handler;
     private LoginDialog dialog;
 
@@ -56,6 +65,11 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        init();
+        initView();
+        initHandler();
+    }
+    private void init(){
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -114,10 +128,7 @@ public class MainActivity extends BaseActivity {
 
             }
         });
-        initView();
-        initHandler();
     }
-
     private void initHandler() {
         handler = new Handler() {
             @Override
@@ -151,10 +162,11 @@ public class MainActivity extends BaseActivity {
         LinearLayout linearLayout = (LinearLayout) view.findViewById(R.id.nav_header);
         linearLayout.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 400));
-        RoundCornerImageView headerView = (RoundCornerImageView) linearLayout.findViewById(R.id.imageView);
+        myInfoImageView = (RoundCornerImageView) linearLayout.findViewById(R.id.imageView);
+        myInfoTextView = (TextView)linearLayout.findViewById(R.id.textView);
         navigationView.addHeaderView(view);
         dialog = new LoginDialog(this);
-        headerView.setOnClickListener(new View.OnClickListener() {
+        myInfoImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(UserManager.getInstance().getUser()==null)
@@ -232,4 +244,14 @@ public class MainActivity extends BaseActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(UserManager.isLogin())
+        {
+            User u = UserManager.getInstance().getUser();
+            ImageUrlLoaderWithCache.getInstence().ImageLoad(u.getImg(),myInfoImageView);
+            myInfoTextView.setText(u.getName().toString().trim());
+        }
+    }
 }

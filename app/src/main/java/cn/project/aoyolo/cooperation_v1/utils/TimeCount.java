@@ -8,25 +8,22 @@ import android.widget.Button;
  * Created by Myy on 2015/11/5.
  */
 public class TimeCount extends CountDownTimer {
-    View view1;
-    View view2;
+    View view;
 
-    public TimeCount(long millisInFuture, long countDownInterval, View view1,View view2) {
+    public TimeCount(long millisInFuture, long countDownInterval, View view) {
         super(millisInFuture, countDownInterval);//参数依次为总时长,和计时的时间间隔
-        this.view1 = view1;
-        this.view2 = view2;
+        this.view = view;
     }
 
     @Override
     public void onFinish() {//计时完毕时触发
-        ((Button) view1).setText("重新验证");
-        view1.setEnabled(true);
-        view2.setEnabled(false);
+        ((Button) view).setText("重新验证");
+        view.setEnabled(true);
     }
 
     @Override
     public void onTick(long millisUntilFinished) {//计时过程显示
-        view1.setEnabled(false);
-        ((Button) view1).setText(millisUntilFinished / 1000 + "秒");
+        view.setEnabled(false);
+        ((Button) view).setText(millisUntilFinished / 1000 + "秒");
     }
 }

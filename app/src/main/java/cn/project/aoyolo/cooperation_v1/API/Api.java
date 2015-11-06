@@ -23,7 +23,7 @@ public class Api
     //后台地址
     private final static String RURL="http://andrewlu.cn/SupplyAndDemondPlatform";
     private final static String HYDURL="http://192.168.1.114:8080/web";//HY宿舍测试地址
-    private final static String HYGURL="http://192.168.16.2:8080/web";//HY公司地址
+    private final static String HYGURL="http://192.168.16.48:8080/web";//HY公司地址
     //测试地址
 
 

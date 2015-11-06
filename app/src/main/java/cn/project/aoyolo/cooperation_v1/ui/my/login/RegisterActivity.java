@@ -4,6 +4,7 @@ package cn.project.aoyolo.cooperation_v1.ui.my.login;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.os.Message;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -42,7 +44,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     //private Thread thread;
     private int countdown = 60;
     private static final int COUNTDOWN = 0, SENDSMS = 1, VALIDSMSTRUE = 2, VALIDSMSFALSE = 3;
-    private boolean isValidTrue = false, isThreadRun = false,isThreadBreak=false;
+    private boolean isValidTrue = false, isThreadRun = false;
     private TimeCount time;
 
     @Override
@@ -141,7 +143,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         mProgressView = findViewById(R.id.register_progress);
         Register_view = findViewById(R.id.register_view);
         Register_head = findViewById(R.id.register_head);
-        time=new TimeCount(60000, 1000,btValid,btRegister);
+        time=new TimeCount(60000, 1000,btValid);
     }
     //全部按钮事件
     @Override
@@ -169,6 +171,10 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                     showProgress(false);
                     showToast("请链接网络");
                 }
+                InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                inputMethodManager.hideSoftInputFromWindow(etPhone.getWindowToken(),0);
+                inputMethodManager.hideSoftInputFromWindow(etPsw.getWindowToken(),0);
+                inputMethodManager.hideSoftInputFromWindow(etValid.getWindowToken(),0);
             }
             break;
             case R.id.forget_passeord:
@@ -177,7 +183,8 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                 overridePendingTransition(R.anim.push_left_in,R.anim.push_left_out);
                 break;
             case R.id.login_form:
-                startActivity(new Intent(this,LoginActivity.class));
+                startActivity(new Intent(this, LoginActivity.class));
+                //MobUtils.UnRegsiterHandler();
                 finish();
                 overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
                 break;
@@ -247,7 +254,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                 public void onSuccess(String t) {
                     super.onSuccess(t);
                     UserManager.getInstance().setUser(user);
-                    showProgress(false);
+                    MobUtils.UnRegsiterHandler();
                     finish();
                     overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
                 }
@@ -259,6 +266,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
             showToast("正确");
         } else {
             showToast("验证码不对");
+            showProgress(false);
         }
     }
 
@@ -302,8 +310,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        MobUtils.UnRegsiterHandler();
-        isThreadBreak=true;
+        //MobUtils.UnRegsiterHandler();
     }
 
 
