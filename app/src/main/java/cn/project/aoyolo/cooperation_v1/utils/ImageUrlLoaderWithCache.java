@@ -22,7 +22,6 @@ import cn.project.aoyolo.cooperation_v1.R;
 public class ImageUrlLoaderWithCache {
     private static ImageUrlLoaderWithCache _ImageUrlLoaderWithCache = null;
     private static LruCache<String,Bitmap> imageCache = null;
-    private static ExecutorService loadPool = Executors.newFixedThreadPool(5);
     private Handler handler;
     private ImageUrlLoaderWithCache(){
         initImageCache();
@@ -50,29 +49,20 @@ public class ImageUrlLoaderWithCache {
         };
     }
     public void ImageLoad(final String path, final ImageView imageView){
-        loadPool.execute(new Runnable() {
-            @Override
-            public void run() {
-                imageView.setTag(path);
-                Bitmap bitmap = imageCache.get(path);
-                if(bitmap!=null)
-                {
-                    refreshImageView(path, imageView, bitmap);
-                }
-                else
-                {
-                    bitmap = getUrlImage(path, imageView);
-                    if(bitmap!=null)
-                    {
-                        refreshImageView(path,imageView,bitmap);
-                    }
-                    else
-                    {
-                        imageView.setImageDrawable(imageView.getResources().getDrawable(R.mipmap.defeat_header));
-                    }
-                }
+        imageView.setTag(path);
+        Bitmap bitmap = imageCache.get(path);
+        if(bitmap!=null)
+        {
+            refreshImageView(path, imageView, bitmap);
+        }
+        else {
+            bitmap = getUrlImage(path, imageView);
+            if (bitmap != null) {
+                refreshImageView(path, imageView, bitmap);
+            } else {
+                imageView.setImageDrawable(imageView.getResources().getDrawable(R.mipmap.defeat_header));
             }
-        });
+        }
     }
 
     private Bitmap getUrlImage(final String path,ImageView imageView){
