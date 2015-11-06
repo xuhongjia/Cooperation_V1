@@ -19,10 +19,25 @@ import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationListener;
 import com.amap.api.location.LocationManagerProxy;
 import com.amap.api.location.LocationProviderProxy;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import org.kymjs.kjframe.http.HttpCallBack;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import cn.project.aoyolo.cooperation_v1.API.FuWuApi;
 import cn.project.aoyolo.cooperation_v1.BaseFragment;
 import cn.project.aoyolo.cooperation_v1.R;
+import cn.project.aoyolo.cooperation_v1.entity.Common;
+import cn.project.aoyolo.cooperation_v1.entity.DetailsEntity;
+import cn.project.aoyolo.cooperation_v1.entity.DistanceEntity;
+import cn.project.aoyolo.cooperation_v1.entity.GeneralResponse;
+import cn.project.aoyolo.cooperation_v1.entity.QueryEntity;
 import cn.project.aoyolo.cooperation_v1.ui.fuwu.ChooseCityActivity;
+import cn.project.aoyolo.cooperation_v1.widget.Common.CommonAdapter;
 
 /**
  * Created by yubin on 2015/10/28.
@@ -48,6 +63,13 @@ public class FuwuFragment extends BaseFragment implements
     private Button btn_fuwu_ok;
     private Button btn_fuwu_reset;
     private Button btn_fuwu_choose;
+    private int flag;
+    private int index;
+    private final ArrayList<Common> commons=new ArrayList<Common>();
+    private CommonAdapter<Common> adapter_commons;
+    private QueryEntity queryEntity=new QueryEntity();
+    private DistanceEntity distanceEntity=new DistanceEntity();
+    private DetailsEntity detailsEntity=new DetailsEntity();
     public View onCreateView(LayoutInflater inflater, ViewGroup root, Bundle b) {
         View view = inflater.inflate(R.layout.fuwu_fragment, null);
         init();
@@ -112,7 +134,14 @@ public class FuwuFragment extends BaseFragment implements
             public void onClick(View v) {
             }
         });
-
+        flag=0;
+        index=19;
+        Date d = new Date();
+        long searchTime = d.getTime();
+        queryEntity.setFlag(flag);
+        queryEntity.setIndex(index);
+        queryEntity.setSearchTime(searchTime);
+        getAllFuwu(queryEntity);
     }
 
     @Override
@@ -310,7 +339,21 @@ public class FuwuFragment extends BaseFragment implements
             tvGroup[3].setText(address_by_choose);}
         }
     }
-    public void getAllFuwu(){
-
+    public void getAllFuwu(QueryEntity queryEntity){
+        FuWuApi.queryLastedCommon(queryEntity, new HttpCallBack() {
+            @Override
+            public void onSuccess(String t) {
+                super.onSuccess(t);
+                GeneralResponse<List<Common>> response = new Gson().fromJson(t,new TypeToken<GeneralResponse<List<Common>>>(){}.getType());
+                if(response.isSuccess()) {
+                    commons.clear();
+                    commons.addAll(response.getData());
+                }
+            }
+            @Override
+            public void onFailure(int errorNo, String strMsg) {
+                super.onFailure(errorNo, strMsg);
+            }
+        });
     }
 }
