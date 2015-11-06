@@ -21,9 +21,11 @@
                 style="@style/my_info_item_linearlayout"
                 >
                 <RelativeLayout
+                    android:id="@+id/name"
                     style="@style/my_info_relative"
                     >
                     <TextView
+                        android:id="@+id/a"
                         style="@style/my_info_item_left_textview"
                         android:text="昵称"/>
                     <TextView
@@ -35,9 +37,10 @@
                 </RelativeLayout>
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="0.3dp"
+                    android:layout_height="0.5dp"
                     />
                 <RelativeLayout
+                    android:id="@+id/phone"
                     style="@style/my_info_relative"
                     >
                     <TextView
@@ -50,9 +53,14 @@
                         />
                 </RelativeLayout>
             </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                />
             <LinearLayout
                 style="@style/my_info_item_linearlayout">
                 <RelativeLayout
+                    android:id="@+id/sex"
                     style="@style/my_info_relative"
                     >
                     <TextView
@@ -67,9 +75,10 @@
                 </RelativeLayout>
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="0.3dp"
+                    android:layout_height="0.5dp"
                     />
                 <RelativeLayout
+                    android:id="@+id/age"
                     style="@style/my_info_relative"
                     >
                     <TextView
@@ -82,9 +91,10 @@
                 </RelativeLayout>
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="0.3dp"
+                    android:layout_height="0.5dp"
                     />
                 <RelativeLayout
+                    android:id="@+id/address"
                     style="@style/my_info_relative"
                     >
                     <TextView
@@ -97,9 +107,10 @@
                 </RelativeLayout>
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="0.3dp"
+                    android:layout_height="0.5dp"
                     />
                 <RelativeLayout
+                    android:id="@+id/job"
                     style="@style/my_info_relative"
                     >
                     <TextView
@@ -113,7 +124,7 @@
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
-                android:layout_height="0.3dp"
+                android:layout_height="0.5dp"
                 />
             <RelativeLayout
                 style="@style/my_info_relative"

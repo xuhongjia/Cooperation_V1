@@ -59,8 +59,8 @@
         <item name="android:layout_alignParentLeft">true</item>
     </style>
     <style name="my_info_item_right_textview" >
-        <item name="android:gravity">center_vertical</item>
-        <item name="android:layout_width">wrap_content</item>
+        <item name="android:gravity">right|center_vertical</item>
+        <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">43dp</item>
         <item name="android:layout_alignParentRight">true</item>
         <item name="android:paddingRight">10dp</item>
@@ -71,6 +71,7 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:background">@drawable/item_click_selector</item>
+        <item name="android:clickable">true</item>
     </style>
     <style name="my_info_item_linearlayout">
         <item name="android:layout_width">match_parent</item>

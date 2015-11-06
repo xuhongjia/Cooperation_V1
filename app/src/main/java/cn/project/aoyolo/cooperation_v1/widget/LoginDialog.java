@@ -1,8 +1,10 @@
 package cn.project.aoyolo.cooperation_v1.widget;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +12,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
+import cn.project.aoyolo.cooperation_v1.ActivityManager;
 import cn.project.aoyolo.cooperation_v1.MainActivity;
 import cn.project.aoyolo.cooperation_v1.R;
 import cn.project.aoyolo.cooperation_v1.ui.my.login.LoginActivity;
@@ -93,6 +96,7 @@ public class LoginDialog extends AlertDialog
             @Override
             public void onClick(View v) {
                 c.startActivity(new Intent(c, LoginActivity.class));
+                ((Activity)c).overridePendingTransition(R.anim.push_left_in,R.anim.push_left_out);
                 if(LoginDialog.this.isShowing())
                 {
                     LoginDialog.this.dismiss();

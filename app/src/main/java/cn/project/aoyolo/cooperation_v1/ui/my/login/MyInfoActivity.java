@@ -68,6 +68,7 @@ public class MyInfoActivity extends BaseActivity
         ViewUtils.inject(this);
         textView.setVisibility(View.GONE);
         initData();
+
 //        initView();
 //        initChooseDialog();
     }
@@ -100,25 +101,25 @@ public class MyInfoActivity extends BaseActivity
     }
 
     //点击事件
-    @OnClick({R.id.imageView,R.id.my_info_name,R.id.my_info_phone,R.id.my_info_sex,R.id.my_info_age,R.id.my_info_address,
-            R.id.my_info_job,R.id.my_info_back})
+    @OnClick({R.id.imageView,R.id.name,R.id.phone,R.id.sex,R.id.age,R.id.address,
+            R.id.job,R.id.my_info_back})
     public void onClick(View view){
         switch (view.getId())
         {
             case R.id.imageView:
                 setImg();
                 break;
-            case R.id.my_info_name:
+            case R.id.name:
                 break;
-            case R.id.my_info_phone:
+            case R.id.phone:
                 break;
-            case R.id.my_info_sex:
+            case R.id.sex:
                 break;
-            case R.id.my_info_age:
+            case R.id.age:
                 break;
-            case R.id.my_info_address:
+            case R.id.address:
                 break;
-            case R.id.my_info_job:
+            case R.id.job:
                 break;
             case R.id.my_info_back:
                 finish();

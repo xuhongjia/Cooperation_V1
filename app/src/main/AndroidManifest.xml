@@ -121,6 +121,8 @@
         </activity>
         <activity android:name=".ui.my.login.ForgetPasswordActivity" >
         </activity>
+        <activity android:name=".ui.my.login.MyInfoItemActivity" >
+        </activity>
     </application>
 
 </manifest>
