@@ -41,6 +41,13 @@ public class TotalSearch
 	private EntityType entityType;
 	private long searchTime;//仅搜索符合截止日期在搜索 时间后面的额记录
 	private int index;//当前请求数据的最后一条记录的下标
+	private int flag;//0表示服务1表示需求
+	public int getFlag() {
+		return flag;
+	}
+	public void setFlag(int flag) {
+		this.flag = flag;
+	}
 	public ConditionType getConditionType() {
 		return conditionType;
 	}

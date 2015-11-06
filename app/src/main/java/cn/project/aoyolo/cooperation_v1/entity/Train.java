@@ -16,8 +16,28 @@ public class Train {
 	private String note;
 	private int flag;//0表示服务，1表示需求
 	private int uId;
+
+	public long getStopTime() {
+		return stopTime;
+	}
+
+	public void setStopTime(long stopTime) {
+		this.stopTime = stopTime;
+	}
+
 	private int volume;
+
+	public long getPublishTime() {
+		return publishTime;
+	}
+
+	public void setPublishTime(long publishTime) {
+		this.publishTime = publishTime;
+	}
+
 	private int evaluationNumber;
+	private long publishTime;
+	private long stopTime;
 	public int getuId() {
 		return uId;
 	}

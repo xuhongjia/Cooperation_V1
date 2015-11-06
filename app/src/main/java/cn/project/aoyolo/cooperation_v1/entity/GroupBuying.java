@@ -14,6 +14,16 @@ public class GroupBuying {
 	private Long endTime;
 	private String extra;
 	private String imgs;
+	private String addres;
+
+	public String getAddres() {
+		return addres;
+	}
+
+	public void setAddres(String addres) {
+		this.addres = addres;
+	}
+
 	private int flag;//0表示服务，1表示需求
 	private int uId;
 	private int volume;
