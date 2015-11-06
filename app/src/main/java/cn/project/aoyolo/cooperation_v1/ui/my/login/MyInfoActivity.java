@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
+import com.lidroid.xutils.view.annotation.event.OnClick;
 
 import cn.project.aoyolo.cooperation_v1.BaseActivity;
 import cn.project.aoyolo.cooperation_v1.R;
@@ -33,7 +34,7 @@ import cn.project.aoyolo.cooperation_v1.widget.RoundCornerImageView;
 public class MyInfoActivity extends BaseActivity
 {
 
-    private RoundCornerImageView headerView;//头像
+
     private Dialog chooseDialog;//选择照相或者相片弹出窗
     private Button btCancle,btTakePhoto,btChoosePhoto;//取消，照相，选择照片
     private final static int TAKE_PHOTO=1;
@@ -56,6 +57,8 @@ public class MyInfoActivity extends BaseActivity
     private ImageView imageView;
     @ViewInject(R.id.textView)
     private TextView textView;
+    @ViewInject(R.id.logout)
+    private View logout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,7 +73,7 @@ public class MyInfoActivity extends BaseActivity
         if(UserManager.isLogin())
         {
             User user = UserManager.getInstance().getUser();
-            ImageUrlLoaderWithCache.getInstence().ImageLoad(user.getImg(),imageView);
+            ImageUrlLoaderWithCache.getInstence().ImageLoad(user.getImg(), imageView);
             my_info_name.setText(user.getName());
             my_info_phone.setText(user.getAccount());
             my_info_address.setText(user.getAddress());
@@ -93,10 +96,42 @@ public class MyInfoActivity extends BaseActivity
             my_info_credit.setText(user.getCredit().toString());
         }
     }
+
+    //点击事件
+    @OnClick({R.id.imageView,R.id.my_info_name,R.id.my_info_phone,R.id.my_info_sex,R.id.my_info_age,R.id.my_info_address,
+            R.id.my_info_job,R.id.logout,R.id.my_info_back})
+    public void onClick(View view){
+        switch (view.getId())
+        {
+            case R.id.imageView:
+                break;
+            case R.id.my_info_name:
+                break;
+            case R.id.my_info_phone:
+                break;
+            case R.id.my_info_sex:
+                break;
+            case R.id.my_info_age:
+                break;
+            case R.id.my_info_address:
+                break;
+            case R.id.my_info_job:
+                break;
+            case R.id.logout:
+                UserManager.getInstance().setUser(null);
+                finish();
+                break;
+            case R.id.my_info_back:
+                finish();
+                break;
+            default:
+                break;
+        }
+    }
+    //初始化界面
     private void initView() {
-        headerView=(RoundCornerImageView)findViewById(R.id.imageView);
         initChooseDialog();
-        headerView.setOnClickListener(new View.OnClickListener() {
+        imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (!chooseDialog.isShowing())
@@ -184,7 +219,7 @@ public class MyInfoActivity extends BaseActivity
             if(resultCode==RESULT_OK)
             {
                 bitmap=(Bitmap)data.getExtras().get("data");
-                headerView.setImageBitmap(bitmap);
+                imageView.setImageBitmap(bitmap);
                 if(chooseDialog.isShowing())
                     chooseDialog.dismiss();
             }

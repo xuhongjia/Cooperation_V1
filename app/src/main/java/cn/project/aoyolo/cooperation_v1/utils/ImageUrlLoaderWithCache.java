@@ -49,6 +49,11 @@ public class ImageUrlLoaderWithCache {
         };
     }
     public void ImageLoad(final String path, final ImageView imageView){
+        if(path==null)
+        {
+            imageView.setImageDrawable(imageView.getResources().getDrawable(R.mipmap.defeat_header));
+            return ;
+        }
         imageView.setTag(path);
         Bitmap bitmap = imageCache.get(path);
         if(bitmap!=null)
