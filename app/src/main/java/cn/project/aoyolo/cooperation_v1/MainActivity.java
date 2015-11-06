@@ -13,11 +13,13 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -160,8 +162,12 @@ public class MainActivity extends BaseActivity {
         view.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT
                 , ViewGroup.LayoutParams.WRAP_CONTENT));
         LinearLayout linearLayout = (LinearLayout) view.findViewById(R.id.nav_header);
+        WindowManager manager=(WindowManager)getSystemService(WINDOW_SERVICE);
+        DisplayMetrics metrice=new DisplayMetrics();
+        manager.getDefaultDisplay().getMetrics(metrice);
+        int height=metrice.heightPixels;
         linearLayout.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                400));
+                height/3));
         myInfoImageView = (RoundCornerImageView) linearLayout.findViewById(R.id.imageView);
         myInfoTextView = (TextView)linearLayout.findViewById(R.id.textView);
         navigationView.addHeaderView(view);
