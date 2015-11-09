@@ -26,45 +26,6 @@ public class GdMapApi {
         return _GDmap;
     }
 
-   /* // 设置时间间隔为-1，只定位一次
-    private void getResult(final AjaxCallBack<String> callBack) {
-        mLocationManagerProxy.requestLocationData(
-                LocationProviderProxy.AMapNetwork, -1, 15, new GdMapListener() {
-                    public void onLocationChanged(AMapLocation amapLocation) {
-                        // TODO Auto-generated method stub
-                        int errorCode = amapLocation.getAMapException()
-                                .getErrorCode();
-                        if (amapLocation != null && errorCode == 0) {
-
-                            StringBuffer result = new StringBuffer();
-                            String desc = "";
-                            // 获取位置信息
-                            Bundle locBundle = amapLocation.getExtras();
-                            // 分割字符串
-                            if (locBundle != null) {
-                                desc = locBundle.getString("desc");
-                                String[] resultStrArray = desc.split(" ");
-                                for (int i = 0; i < resultStrArray.length; i++) {
-                                    if (i > 1) {
-                                        result.append(resultStrArray[i]);
-                                    }
-                                }
-                            }
-                            textView.setText(result.toString());
-                            callBack.onSuccess(result.toString());
-                            // 定位成功后，移除定位
-							*//* mLocationManagerProxy.removeUpdates(this); *//*
-
-                        } else {
-                            callBack.onFailure(null, errorCode, amapLocation
-                                    .getAMapException().getErrorMessage());
-
-                        }
-                    }
-                });
-        mLocationManagerProxy.setGpsEnable(false);
-
-    }*/
 
     public void getLocation(GdMapListener listener) {
         mLocationManagerProxy.requestLocationData(
